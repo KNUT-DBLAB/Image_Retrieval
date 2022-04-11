@@ -40,18 +40,15 @@ relationship을 더 잘 활용할 수 있는걸 하고싶음..
 
 '''
 
-
-
-
-
 #gpu 사용
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
+#idx
+features = csr_matrix(np.load('./data/idFreFeature.npy'),dtype=np.float32) #1000 X 100
+adj  = torch.FloatTensor(np.load('./data/idAdj.npy')) #1000X1000
+features = csr_matrix(features) #희소행렬로 변경함
 
 
-features = csr_matrix(np.load('./data/idFreFeature.npy'),dtype=np.float32)
-adj  = torch.FloatTensor(np.load('./data/idAdj.npy'))
-features = csr_matrix(features)
 
 def normalize(mx):
     rowsum = np.array(mx.sum(1))
@@ -65,7 +62,7 @@ features = normalize(features)
 testFile = open('./data/cluster.txt','r') # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
 readFile = testFile.readline()
 label = (readFile[1:].replace("'",'').replace(' ','').split(','))
-labels = []
+labels = []  # string to int (LongTensor로 변경하기 위해)
 for i in range(1000)  :
     labels.append(int(label[i]))
 
