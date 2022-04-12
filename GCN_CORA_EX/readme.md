@@ -1,19 +1,15 @@
-# Supervised Node Classification using Graph Convolutional Network
+예제 코드 : https://github.com/fahim-sikder/Node-Classification-GCN
 
-This repository contains the CORA dataset and code for node classification using GCN. 
 
-The dataset looks like this:
 
-<img src='fig/datasetGraph.jpg'>
+목적
 
-To solve this problem we have implemented the following model.
+DataSet : Cora Dataset
 
-<img src='fig/model.png'>
+cora.cites : 논문 간 인용관계를 나타냄 -> ndarray(5429,2)
+cora.content : <논문 id> <논문 feature값> <label> 로 구성됨 -> ndarray(2078, 1435)
+  
+AdjMatrix : id x id             -> tensor(2708, 2708)
+FeatureMatrix : id x feature    -> tensor(2708, 1433)
+Y : labels                      -> tensor(2708, )
 
-After training the model, we got the following accuracy.
-
-<img src='fig/acc.png'>
-
-### Reference:
-1. https://github.com/tkipf/gcn
-2. http://networkrepository.com/
