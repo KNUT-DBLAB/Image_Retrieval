@@ -1,160 +1,90 @@
-import util as ut
-import util2 as ut2
-import YEmbedding as yed
-import numpy as np
+import GCN as md
 import torch
-import math
-from torch.nn.parameter import Parameter
+import util as ut
 from torch.nn.modules.module import Module
 import torch.nn as nn
-import torch.nn.functional as F
-import time
+#import pandas as pd
 import torch.optim as optim
-import matplotlib.pyplot as plt
-from tqdm import tnrange
-import pandas as pd
-from scipy.sparse import csr_matrix
-from scipy.sparse import coo_matrix
-from scipy.sparse import diags
-from scipy.sparse import eye
-from pathlib import Path
-from functools import partial
-import csv
-
-from scipy.sparse import csr_matrix
-
-
-def main():
-    '''
-        csv 파일로 만들어야 하는 것(이미지 천 개에 대한 데이터들) : region_descriptiong> image_regions
-            columns Name(31310)
-            featuremap(31310)
-            이미지 1000개에 대한 adjMatrix(train 용)
-    '''
-    img_id = 2
-    img_cnt = 1000
-
-    #featuremap = np.load('./data/idFreFeature.npy')
-    #idAdj = np.load('./data/idAdj.npy')
-
-    # AllAdj = np.load('./data/frexfre1000.npy',allow_pickle=True) #각 이미지의 freObjxfreObj 한 인접행렬 1000개
-    # print(AllAdj[1][1])
-    # print(torch.Tensor(AllAdj[1][1]))
-
-
-
-    ''' id, Adj, label List 만드는 코드 '''
-    #빈출 단어 값
-    testFile = open('./data/freObj.txt', 'r')  # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
-    readFile = testFile.readline()
-    freObj = (readFile[1:-1].replace("'", '').replace(' ', '')).split(',')
-    freObj= freObj[:100] #빈출 100 단어 만 사용
-
-    testFile = open('./data/cluster.txt', 'r')  # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
-    readFile = testFile.readline()
-    label = (readFile[1:-1].replace("'", '').replace(' ', '')).split(',')
-    label = label[:1000]  # 라벨 이미지 개수만큼 가져옴
-
-
-    # # 임베딩값 freObj x embedding(10)
-    # feature = ut.objNameEmbedding(label)
-
-    dataset = []
-    for i in range(1000) :
-        adj = ut.createAdj(i, freObj)
-        dataset.append([i+1, adj, label[i]])
-
-    np.save('./data/frexfre1000.npy', np.ndarray(dataset))
-
-
-    # features = np.load('./data/frexfre1000.npy', allow_pickle=True)[0]
-    # print(features)
-
-   # # features = csr_matrix(np.load('./data/frexfre1000.npy'), dtype=np.float32)
-   #  adj = torch.FloatTensor(np.load('./data/idAdj.npy'))
 
 
 '''
-    embedding_clustering = yed.YEmbedding(xlxspath)
-    # YEmbedding
-    idCluster = embedding_clustering[['image_id','cluster','distance_from_centroid']]
+Model 2
+- Adj : id x id
+- Feature : img x (freObj x freObj) // 1000x(100x100)
+- Lable : 1000 x 1
 
-    features = csr_matrix(paper_features_label[:, 1:-1], dtype=np.float32)
-    labels = paper_features_label[:, -1]
-    lbl2idx = {k: v for v, k in enumerate(sorted(np.unique(labels)))}
-    labels = [lbl2idx[e] for e in labels]
-    labels[:5]
-
-    n_labels = labels.max().item() + 1
-    n_features = features.shape[1]
-    n_labels, n_features
-
-    #train/val set 나눔
-    np.random.seed(34)
-    n_train = 200
-    n_val = 300
-    n_test = len(featureEmbedding) - n_train - n_val
-    idxs = np.random.permutation(len(featureEmbedding))
-    idx_train = torch.LongTensor(idxs[:n_train])
-    idx_val = torch.LongTensor(idxs[n_train:n_train + n_val])
-    idx_test = torch.LongTensor(idxs[n_train + n_val:])
-
-    torch.manual_seed(34)
-
-    model = GCN(nfeat=featureEmbedding,
-                nhid=20,  # hidden = 16
-                nclass=n_labels,
-                dropout=0.5)  # dropout = 0.5
-    optimizer = optim.Adam(model.parameters(),
-                           lr=0.001, weight_decay=5e-4)
-
-    def step():
-        t = time.time()
-        model.train()
-        optimizer.zero_grad()
-        output = model(features, adj)
-        loss = F.nll_loss(output[idx_train], labels[idx_train])
-        acc = accuracy(output[idx_train], labels[idx_train])
-        loss.backward()
-        optimizer.step()
-
-        return loss.item(), acc
-
-    def evaluate(idx):
-        model.eval()
-        output = model(features, adj)
-        loss = F.nll_loss(output[idx], labels[idx])
-        acc = accuracy(output[idx], labels[idx])
-
-        return loss.item(), acc
-
-    def accuracy(output, labels):
-        preds = output.max(1)[1].type_as(labels)
-        correct = preds.eq(labels).double()
-        correct = correct.sum()
-        return correct / len(labels)
-
-    epochs = 1000
-    print_steps = 100
-    train_loss, train_acc = [], []
-    val_loss, val_acc = [], []
-
-    for i in tnrange(epochs):
-        tl, ta = step()
-        train_loss += [tl]
-        train_acc += [ta]
-
-        if ((i + 1) % print_steps) == 0 or i == 0:
-            tl, ta = evaluate(idx_train)
-            vl, va = evaluate(idx_val)
-            val_loss += [vl]
-            val_acc += [va]
-
-            print(
-                'Epochs: {}, Train Loss: {:.3f}, Train Acc: {:.3f}, Validation Loss: {:.3f}, Validation Acc: {:.3f}'.format(i, tl, ta, vl, va))
+기존 GCN 코드를 이용해 Scene graph의 realationship이 반영된 GCN 모델 만들기
+-> 전처리 말고 직접적으로 모델을 여러 번 학습 시킬 순 없는지? 
+지금 사용하는 Adj는 cluster 값을 알아야만 가능한데 각 이미지를 학습시켜서는 안되는지?
 
 '''
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    main()
+
+
+# gpu 사용
+device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+
+features,adj, labels = ut.loadData() #데이터 불러옴
+idx_train, idx_val, idx_test = ut.splitDataset(34,200,300,len(features)) #train/val/test로 나눌 imageId를 가진 배열 return
+#ut.toDevice(adj, features, labels, idx_train, idx_val, idx_test) # gpu면 gpu로 cpu면 cpu로~
+
+
+n_labels = labels.max().item() + 1  # 15
+#n_features = features.shape[1]  # 100
+n_features = len(features)  # 100
+# seed 고정
+torch.manual_seed(34)
+
+# model
+#GCN(  (gc1): GraphConvolution (100 -> 20)   (gc2): GraphConvolution (20 -> 15) )
+model = md.GCN(nfeat=n_features,
+            nhid=20,  # hidden = 16
+            nclass=n_labels,
+            dropout=0.5)  # dropout = 0.5
+optimizer = optim.Adam(model.parameters(),
+                       lr=0.001, weight_decay=5e-4)
+
+epochs = 1000
+print_steps = 100
+train_loss, train_acc = [], []
+val_loss, val_acc = [], []
+
+
+for i in range(epochs):
+    tl, ta = ut.train(model,optimizer,features, adj, idx_train,labels)
+    train_loss += [tl]
+    train_acc += [ta]
+
+    if ((i + 1) % print_steps) == 0 or i == 0:
+        tl, ta = ut.evaluate(idx_train, model,features, adj,labels)
+        vl, va = ut.evaluate(idx_train, model,features, adj,labels)
+        val_loss += [vl]
+        val_acc += [va]
+
+        print(
+            'Epochs: {}, Train Loss: {:.3f}, Train Acc: {:.3f}, Validation Loss: {:.3f}, Validation Acc: {:.3f}'.format(
+                i, tl, ta, vl, va))
+
+output = model(features, adj)
+
+# test
+samples = 10
+# torch.randperm : 데이터 셔플
+# idx_sample = idx_test[torch.randperm(len(idx_test))[:samples]]
+idx_sample = idx_test[torch.randperm(len(idx_test))[:samples]]
+print(idx_sample)
+
+idx2lbl = ['0번 그림', '1번 그림', '2번 그림', '3번 그림', '4번 그림', '5번 그림', '6번 그림', '7번 그림'
+    , '8번 그림', '9번 그림', '10번 그림', '11번 그림', '12번 그림', '13번 그림', '14번 그림']
+# 실제 라벨 10개, predicate 결과 10개
+
+# numpy.argmax() : 주어진 배열에서 가장 높은 값을 가진 인덱스 반환
+# pd.tolist() : 동일 위치(레벨)에 있는 데이터끼리 묶어줌
+df = pd.DataFrame({'Real': [idx2lbl[e] for e in labels[idx_sample].tolist()],
+                   'Pred': [idx2lbl[e] for e in output[idx_sample].argmax(1).tolist()]})
+# [idx2lbl[e] for e in output[idx_sample].argmax(1).tolist()] : 예측한 값이 label의 어디에 속하는지
+# Pred
+# idx_sample 개수만큼의 output을 가져오는데, argmax로 output 값 15개(각 cluster에 대한 값) 중 가장 큰 값을 뽑고, 그 위치를 받음
+# tolist()로 각 feature 별 model의 output 값을 받음
+# for 문을 통해 idx2Lble에서 해당하는 label을 반환받음.
+print(df)

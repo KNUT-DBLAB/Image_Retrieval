@@ -10,8 +10,9 @@
   - 기존 GNN 모델의 사용하는 input data 형태 확인
 - 학습 및 검증
   - 학습 데이터와 기존 GNN 모델인 GCN을 이용하여 유사 이미지 분류
-    - GraphClassficiation (~4.13)
-    - NodeClassification (~4.15)
+    - NodeClassification (~4.13)
+    - GraphClassficiation (~4.15)
+    
   - Accuracy 및 Loss 확인 및 검증
 ---
 
@@ -32,13 +33,12 @@
 >   - 코드의 기능   
 
 #### 22.04.12)
-> - Cora Dataset을 이용한 CoraGCN code 주석 정리
 > - Cora Dataset을 이용한 CoraGCN code Upload
-
-#### -22.04.12 할 거~
+> - Cora Dataset을 이용한 CoraGCN code 주석 정리
 > - Visual Genome Dataset 분석 내용 정리
 > - Visual Genome Dataset을 이용한 Node Classification Readme 정리
-
+> - Visual Genome Dataset 전처리 관련 Utility Readme 정리
+> - CoraGCN code를 이용한 Node Classification 학습 및 검증 -> data quality issue(epoch 1000 - acc:0.160)
 
 
 

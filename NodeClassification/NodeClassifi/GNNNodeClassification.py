@@ -15,7 +15,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import time
 import torch.optim as optim
-import matplotlib.pyplot as plt
 import pandas as pd
 from scipy.sparse import csr_matrix
 from scipy.sparse import coo_matrix
@@ -43,11 +42,17 @@ relationship을 더 잘 활용할 수 있는걸 하고싶음..
 #gpu 사용
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
+<<<<<<<< HEAD:NodeClassification/NodeClassific/dum/GNNNodeClassification.py
+features = csr_matrix(np.load('../data/idFreFeature.npy'), dtype=np.float32) #csr_matrix : (1000,100)
+adj = torch.FloatTensor(np.load('../data/idAdj.npy')) #tensor(1000,1000)
+features = csr_matrix(features)
+========
 #idx
 features = csr_matrix(np.load('./data/idFreFeature.npy'),dtype=np.float32) #1000 X 100
 adj  = torch.FloatTensor(np.load('./data/idAdj.npy')) #1000X1000
 features = csr_matrix(features) #희소행렬로 변경함
 
+>>>>>>>> upstream/master:NodeClassification/NodeClassifi/GNNNodeClassification.py
 
 
 def normalize(mx):
@@ -59,7 +64,11 @@ def normalize(mx):
     return mx
 
 features = normalize(features)
+<<<<<<<< HEAD:NodeClassification/NodeClassific/dum/GNNNodeClassification.py
+testFile = open('../data/cluster.txt', 'r')  # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
+========
 testFile = open('./data/cluster.txt','r') # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
+>>>>>>>> upstream/master:NodeClassification/NodeClassifi/GNNNodeClassification.py
 readFile = testFile.readline()
 label = (readFile[1:].replace("'",'').replace(' ','').split(','))
 labels = []  # string to int (LongTensor로 변경하기 위해)
@@ -209,6 +218,7 @@ samples = 10
 #torch.randperm : 데이터 셔플
 #idx_sample = idx_test[torch.randperm(len(idx_test))[:samples]]
 idx_sample = idx_test[torch.randperm(len(idx_test))[:samples]]
+print(torch.randperm(len(idx_test))[:samples])
 print(idx_sample)
 
 idx2lbl = ['0번 그림','1번 그림', '2번 그림', '3번 그림', '4번 그림', '5번 그림', '6번 그림', '7번 그림'
