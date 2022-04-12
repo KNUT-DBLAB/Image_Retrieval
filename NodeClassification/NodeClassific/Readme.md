@@ -1,29 +1,83 @@
 # NodeClassification
-Visual Genome을 사용한 Node classfication 모델
 
+----
+> 
+**모델 목표 : 이미지 간 유사 여부 판별 모델**
+  
+> 문제를 단순 graph classfication 으로 축소하여 진행함  
+> 모델의 아웃풋으로 15개의 클래스 중에서 가장 유사한 클러스터링 값을 예측하면, 원래 라벨과 비교해서 학습하고,  
+범위1과 범위 2의 예측 클래스 번호 간 비교를 통해 TF를 return 함   
+
+> 해당 예제에서는 df를 이용해 아래와 같이 결과를 확인함
+> 
 ---
 
-- sub와 obj  간에 relationship이 반영이 되지 않은 모델
-- input data format
-  - Adj : id x id (같은 cluster 값을 갖는 경우 1로 체크함) // 1000x1000
-  - Feature : id x freObj(해당 img에 FreOBJ가 있는 경우 1, 없는 경우 0) // 1000x100
-  - freObj : 대상이 되는 이미지 1000개의 Scene graph에서 가장 언급량이 많은 Obj 100개
-  - Label : 각 id 당 cluster 번호 // 1000x1
 
----
+> 
 
--> 하은씨 수정해주세요~
+## Model 1
+- sub와 obj  간에 relationship이 반영이 되지 않은 모델  
+- Adjacency Matrix의 선정에 오류 있음
+>   
 
-GNN Node Classification.py(/GCN0411)   
-dataset : Visual Genome.Scence graph   
- 
-Adj : id x id (같은 cluster 값을 갖는 경우 1로 체크함), 1000x1000  
-Feature : id x freOBJ(해당 img에 FreOBJ가 있는 경우 1, 없는 경우 0)  
-freObj : 대상이 되는 이미지 1000개의 Scene graph에서 가장 언급량이 많은 Obj 100개  
-Label : 각 id 당 cluster 번호  
-cluster는 bert-base-nli-mean-tokens를 이용해 15개의 클러스터로 분류했음  
--> 1000개의 region_graph의 phrase 값을 embedding 함  
--> 이 부분도 relationship이 잘 나타나지 않은 것 같아 아쉬움  
-relationship을 더 잘 활용할 수 있는 걸 하고 싶음  
-모델의 아웃풋으로 15개의 클래스 중에서 가장 유사한 클러스터링 값을 도출하면, 원래 라벨과 비교해서 학습하고,  
-범위1과 범위 2의 예측 클래스 번호끼리 비교해서 TF를 return 함. 그런데 비교하는 부분은 단순 비교  
+
+### **Input data format**
+> **Adj** : id x id (같은 cluster 값을 갖는 경우 1로 체크해 인접 관계를 나타냄) (1000, 1000)  
+**Feature** : id x freObj(해당 img의 relationship을 갖는 Obj 또는 subject내에  freObj가 있는 경우 1, 없는 경우 0) (1000, 100)  
+   - freObj : 대상이 되는 이미지 1000개의 Scene graph에서 가장 언급량이 많은 Obj 100개      
+>   
+**Label** : 각 id 당 cluster 번호, 총 15개의 cluster 종류가 있음 (1000, 1)    
+  - cluster는 bert-base-nli-mean-tokens를 이용해 15개의 클러스터로 분류했음   
+  - region_graph.json에서 이미지 1000개의 phrase 값을 embedding 해 유사 여부를 판단하고 clustering 과정을 통해 15가지 종류로 이미지를 분류함    
+      이를 통해 Label 값을 생성함  
+- realtionship이 잘 나타날 수 있도록 개선 필요
+   
+  
+  > 
+
+
+
+## Model 2(Node Classification) : 
+- Adj Matrix가 인접을 나타내지 않음   
+
+### **Input data format**
+> **Adj** : ImageId x FreObj (ImageId에 따른 object의 언급을 나타냄) (1000, 100)  
+**Feature** : freObj의 Fasttext Embedding (100,10)
+   - freObj Column내에서 freObj의 각 단어를 FastEmbedding을 통해 특징 지음 
+> 
+>**Label** : 각 id 당 cluster 번호, 총 15개의 cluster 종류가 있음 (1000, 1)   
+  - model 1과 동일함
+  
+  >
+
+----  
+> 
+## Code 관련 내용
+> **model 1**
+- main.py  : GCN과 Util을 이용, 모델 구현 및 epoch 설정 등에 관한 내용
+- util.py :  load data(), train(), evaluate() 및 test() 등 관련 함수
+- GCN.py : 모델 정의
+>
+> **model 2**
+- NodeClass2.py : Model 1의 GCN.py와 util.py를 동일하게 사용하며, Input data 변경 관련한 수정
+  
+
+>
+
+
+## **Failure Log**
+
+- 모델 1의 경우 id의 cluster값을 안다는 전제가 필요함 *-> Node Classification이라고 할 수 없음  
+Model 2의 경우 accuracy가 매우 낮은 것을 알 수 있음.
+
+
+**개선에 관한 의견**
+
+
+
+
+
+>
+
+응용 코드 : https://github.com/fahim-sikder/Node-Classification-GCN
+
