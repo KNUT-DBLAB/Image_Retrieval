@@ -24,9 +24,26 @@
 #### 22.04.06)
 > - GCN 모델에 input의 포맷이 어떻게 되어있는지 파악 부족
 > - CCN 모델에서 Graph Convolution을 어떻게 코드로 구현되었는지의 대한 파악 부족
-> - 4.5/화 까지 마무리 하기로 했으나 기존 GCN 모델 사용에서 문제가 생겨 지연  
->
+> - 4.5/화 까지 마무리 하기로 했으나 기존 GCN 모델 사용에서 문제가 생겨 지연   
+
+#### 22.04.11)
+> - Cora Dataset을 이용한 GCN 예제 코드 분석
+>   - Input, Output type 및 shape
+>   - 코드의 기능   
+
+#### 22.04.12)
+> - Cora Dataset을 이용한 CoraGCN code 주석 정리
+> - Cora Dataset을 이용한 CoraGCN code Upload
+
+#### -22.04.12 할 거~
+> - Visual Genome Dataset 분석 내용 정리
+> - Visual Genome Dataset을 이용한 Node Classification Readme 정리
+
+
+
+
 >__개선사항__  
 > - [ ] CORA dataset을 이용한 GNN 방법 정리
 
 ---
+
