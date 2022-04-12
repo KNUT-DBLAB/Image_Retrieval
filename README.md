@@ -32,12 +32,11 @@
 >   - 코드의 기능   
 
 #### 22.04.12)
-> - Cora Dataset을 이용한 CoraGCN code 주석 정리
 > - Cora Dataset을 이용한 CoraGCN code Upload
-
-#### -22.04.12 할 거~
+> - Cora Dataset을 이용한 CoraGCN code 주석 정리
 > - Visual Genome Dataset 분석 내용 정리
 > - Visual Genome Dataset을 이용한 Node Classification Readme 정리
+> - Visual Genome Dataset 전처리 관련 Utility Readme 정리
 
 
 
