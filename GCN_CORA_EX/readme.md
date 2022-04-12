@@ -46,13 +46,13 @@ module 클래스 상속
 
 > **self.weight** : weight 매개변수 설정. GCN을 정의하는 핵심동작  
 → self.weight.torch.mm의 사용범위는 2차원 행렬. input.shape = [B,N,F]면 사용되지 않음
-> - parameter : Layer가 아닌 파라미터 값만 갖고 있음. 모듈의 파라미터 값들을 iterator로 반환함. object type은 torch.Tensor임  
+> - parameter : Layer가 아닌 파라미터 값만 갖고 있음.   
+모듈의 파라미터 값들을 iterator로 반환함.   
+object type은 torch.Tensor임  
 module의 attribute로 할당하면 자동으로 파라메터 리스트에 추가됨   
 
 > **self.reset_parameters()** : 매개변수(가중치) 초기화.   대부분 인자로 weight를 받음.  해당 예제에서는 reset_parameters()를 정의해 self.weight를 초기화 함  
 → Gradient vanishing과 exploding을 막기 위해 사용
-
-
 
 
 
@@ -62,7 +62,7 @@ module의 attribute로 할당하면 자동으로 파라메터 리스트에 추�
         if self.bias is not None:
             self.bias.data.uniform_(-stdv, stdv)
 
-> 초기화 메소드  
+> **초기화 메소드**   
 self : GraphConvolution (1433 -> 20)  
 위와 같이 따로 정의하지 않고 모듈의 reset_parameters()를 호출해 사용 가능
 
@@ -114,7 +114,7 @@ nclass = out_features = 출력되는 차원 ≈  출력되는 클래스(label)�
 > gc1 : (입력 데이터의 차원, hidden layer의 차원) GraphConvolution(1433->20)  
 > gc2 : (hidden layer의 차원, 출력 데이터의 차원(논문의 label 종류 수))  GraphConvolution(20->7)
 
-> Dropout  
+> **Dropout**  
 > - over fitting을 막기 위해서 사용  
 > - 학습 시 레어어 간 연결 중 일부를 랜덤하게 삭제해, 일반화 성능이 높아짐
 
@@ -127,7 +127,7 @@ nclass = out_features = 출력되는 차원 ≈  출력되는 클래스(label)�
 
 
 
-> 순전파 학습  
+> **순전파 학습**  
 > input type : tensor  
 output : tensor  
 
