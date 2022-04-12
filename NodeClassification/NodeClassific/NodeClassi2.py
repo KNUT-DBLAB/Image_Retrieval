@@ -81,7 +81,7 @@ model = md.GCN(nfeat=n_features,
 optimizer = optim.Adam(model.parameters(),
                        lr=0.001, weight_decay=5e-4)
 
-epochs = 8000
+epochs = 1000
 print_steps = 100
 train_loss, train_acc = [], []
 val_loss, val_acc = [], []
