@@ -19,18 +19,18 @@ https://visualgenome.org/
 - 각 이미지의 범위에 대한 설명(Phrase)를 사용해 Image를 Cluster로 분류할 때 사용함 -> util readme  참고 
 - Object는 Object name이 아닌 id로만 제공됨  
 
-![region_graph Structure]https://github.com/Hanin00/Image_Retrieval/blob/82326deea0e8b8e4092b23ca5b8116548a6f8054/extraImages/region_graphJsonStructure.PNG  
+![region_graphStructure]https://github.com/Hanin00/Image_Retrieval/blob/82326deea0e8b8e4092b23ca5b8116548a6f8054/extraImages/region_graphJsonStructure.PNG  
 
 ### scene_graph.json
 - 이미지 내 Object 간의 연결 관계를 Relationships를 통해 나타냄
 - region_graph.json과 달리 phrase나 bounding box의 좌표가 없고, objects.json과 달리 object Name이 없음
 
-![scene_graph Structure]https://github.com/Hanin00/Image_Retrieval/blob/82326deea0e8b8e4092b23ca5b8116548a6f8054/extraImages/scene_graphsJsonStructure.PNG  
+![scene_graphStructure]https://github.com/Hanin00/Image_Retrieval/blob/82326deea0e8b8e4092b23ca5b8116548a6f8054/extraImages/scene_graphsJsonStructure.PNG  
 
 ### objects.json
 - 동일 이미지 Id에 속한 Object의 Id와 object를 특정하는 bounding box의 왼쪽 상단의 x,y 좌표 및 w, h와 Name, synset을 제공함
 - 이미지 내의 관계를 이용하기 위해 사용한 region_graph와 scene_graph에는 object Name이 없어 Object.json내의 objectId를 비교해 Object name을 얻는 방법으로 사용함
 
-![objects Structure]https://github.com/Hanin00/Image_Retrieval/blob/82326deea0e8b8e4092b23ca5b8116548a6f8054/extraImages/objectStructure.PNG  
+![objectsStructure]https://github.com/Hanin00/Image_Retrieval/blob/82326deea0e8b8e4092b23ca5b8116548a6f8054/extraImages/objectStructure.PNG  
 이미지 출처 : visualGenome https://visualgenome.org/api/v0/api_readme
  
