@@ -15,7 +15,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import time
 import torch.optim as optim
-#import pandas as pd
+import pandas as pd
 from scipy.sparse import csr_matrix
 from scipy.sparse import coo_matrix
 from scipy.sparse import diags
@@ -42,8 +42,8 @@ relationship을 더 잘 활용할 수 있는걸 하고싶음..
 # gpu 사용
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
-features = csr_matrix(np.load('./data/idFreFeature.npy'), dtype=np.float32) #csr_matrix : (1000,100)
-adj = torch.FloatTensor(np.load('./data/idAdj.npy')) #tensor(1000,1000)
+features = csr_matrix(np.load('../data/idFreFeature.npy'), dtype=np.float32) #csr_matrix : (1000,100)
+adj = torch.FloatTensor(np.load('../data/idAdj.npy')) #tensor(1000,1000)
 features = csr_matrix(features)
 
 
@@ -57,7 +57,7 @@ def normalize(mx):
 
 
 features = normalize(features)
-testFile = open('./data/cluster.txt', 'r')  # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
+testFile = open('../data/cluster.txt', 'r')  # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
 readFile = testFile.readline()
 label = (readFile[1:].replace("'", '').replace(' ', '').split(','))
 labels = []
@@ -215,6 +215,7 @@ samples = 10
 # torch.randperm : 데이터 셔플
 # idx_sample = idx_test[torch.randperm(len(idx_test))[:samples]]
 idx_sample = idx_test[torch.randperm(len(idx_test))[:samples]]
+print(torch.randperm(len(idx_test))[:samples])
 print(idx_sample)
 
 idx2lbl = ['0번 그림', '1번 그림', '2번 그림', '3번 그림', '4번 그림', '5번 그림', '6번 그림', '7번 그림'

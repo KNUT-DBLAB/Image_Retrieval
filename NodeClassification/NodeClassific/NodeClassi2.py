@@ -1,3 +1,5 @@
+import sys
+
 import GCN as md
 import torch
 import util as ut
@@ -30,6 +32,21 @@ features = torch.Tensor(features) # tensor(100x10)
 adj = torch.FloatTensor(np.load('./data/idFreFeature.npy'))  # tensor(1000,100)
 
 
+#
+# #Data 분포 보고 싶어서 시각화 해봄.
+# import seaborn as sns
+# import matplotlib.pyplot as plt
+#
+# data = adj
+# #pd.set_option('display.max_rows',None)
+# pd.set_option('display.max_columns',None)
+# df = pd.DataFrame(data, columns=freObjList)
+# print(df)
+# ax = sns.heatmap(df)
+# plt.show()
+#
+# sys.exit()
+
 
 testFile = open('./data/cluster.txt', 'r')  # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
 readFile = testFile.readline()
@@ -58,13 +75,13 @@ torch.manual_seed(34)
 # model
 #GCN(  (gc1): GraphConvolution (100 -> 20)   (gc2): GraphConvolution (20 -> 15) )
 model = md.GCN(nfeat=n_features,
-            nhid=20,  # hidden = 16
+            nhid=100,  # hidden = 16
             nclass=n_labels,
             dropout=0.5)  # dropout = 0.5
 optimizer = optim.Adam(model.parameters(),
                        lr=0.001, weight_decay=5e-4)
 
-epochs = 80000
+epochs = 8000
 print_steps = 100
 train_loss, train_acc = [], []
 val_loss, val_acc = [], []
@@ -81,17 +98,18 @@ for i in range(epochs):
         val_loss += [vl]
         val_acc += [va]
 
-        print(
-            'Epochs: {}, Train Loss: {:.3f}, Train Acc: {:.3f}, Validation Loss: {:.3f}, Validation Acc: {:.3f}'.format(
+        print('Epochs: {}, Train Loss: {:.3f}, Train Acc: {:.3f}, Validation Loss: {:.3f}, Validation Acc: {:.3f}'.format(
                 i, tl, ta, vl, va))
 
-output = model(features, adj)
-
+output = model(features, adj) #[100,15]
+print(output.shape)
 # test
 samples = 10
 # torch.randperm : 데이터 셔플
 # idx_sample = idx_test[torch.randperm(len(idx_test))[:samples]]
 idx_sample = idx_test[torch.randperm(len(idx_test))[:samples]]
+print(torch.randperm(len(idx_test))[:samples])
+print(idx_test)
 print(idx_sample)
 
 idx2lbl = ['0번 그림', '1번 그림', '2번 그림', '3번 그림', '4번 그림', '5번 그림', '6번 그림', '7번 그림'
