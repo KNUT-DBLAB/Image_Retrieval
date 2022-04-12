@@ -1,6 +1,5 @@
 # NodeClassification
 
-----
 > 
 **모델 목표 : 이미지 간 유사 여부 판별 모델**
   
@@ -10,7 +9,6 @@
 
 > 해당 예제에서는 df를 이용해 아래와 같이 결과를 확인함
 > 
----
 
 
 > 
@@ -23,14 +21,14 @@
 
 ### **Input data format**
 > **Adj** : id x id (같은 cluster 값을 갖는 경우 1로 체크해 인접 관계를 나타냄) (1000, 1000)  
-**Feature** : id x freObj(해당 img의 relationship을 갖는 Obj 또는 subject내에  freObj가 있는 경우 1, 없는 경우 0) (1000, 100)  
-   - freObj : 대상이 되는 이미지 1000개의 Scene graph에서 가장 언급량이 많은 Obj 100개      
+>**Feature** : id x freObj(해당 img의 relationship을 갖는 Obj 또는 subject내에  freObj가 있는 경우 1, 없는 경우 0) (1000, 100)  
+>   - freObj : 대상이 되는 이미지 1000개의 Scene graph에서 가장 언급량이 많은 Obj 100개      
 >   
-**Label** : 각 id 당 cluster 번호, 총 15개의 cluster 종류가 있음 (1000, 1)    
-  - cluster는 bert-base-nli-mean-tokens를 이용해 15개의 클러스터로 분류했음   
-  - region_graph.json에서 이미지 1000개의 phrase 값을 embedding 해 유사 여부를 판단하고 clustering 과정을 통해 15가지 종류로 이미지를 분류함    
+> **Label** : 각 id 당 cluster 번호, 총 15개의 cluster 종류가 있음 (1000, 1)    
+>  - cluster는 bert-base-nli-mean-tokens를 이용해 15개의 클러스터로 분류했음   
+>  - region_graph.json에서 이미지 1000개의 phrase 값을 embedding 해 유사 여부를 판단하고 clustering 과정을 통해 15가지 종류로 이미지를 분류함    
       이를 통해 Label 값을 생성함  
-- realtionship이 잘 나타날 수 있도록 개선 필요
+>- realtionship이 잘 나타날 수 있도록 개선 필요
    
   
   > 
@@ -42,11 +40,11 @@
 
 ### **Input data format**
 > **Adj** : ImageId x FreObj (ImageId에 따른 object의 언급을 나타냄) (1000, 100)  
-**Feature** : freObj의 Fasttext Embedding (100,10)
-   - freObj Column내에서 freObj의 각 단어를 FastEmbedding을 통해 특징 지음 
+>**Feature** : freObj의 Fasttext Embedding (100,10)
+>  - freObj Column내에서 freObj의 각 단어를 FastEmbedding을 통해 특징 지음 
 > 
 >**Label** : 각 id 당 cluster 번호, 총 15개의 cluster 종류가 있음 (1000, 1)   
-  - model 1과 동일함
+>  - model 1과 동일함
   
   >
 
@@ -54,25 +52,26 @@
 > 
 ## Code 관련 내용
 > **model 1**
-- main.py  : GCN과 Util을 이용, 모델 구현 및 epoch 설정 등에 관한 내용
-- util.py :  load data(), train(), evaluate() 및 test() 등 관련 함수
-- GCN.py : 모델 정의
+> - main.py  : GCN과 Util을 이용, 모델 구현 및 epoch 설정 등에 관한 내용
+> - util.py :  load data(), train(), evaluate() 및 test() 등 관련 함수
+> - GCN.py : 모델 정의
 >
 > **model 2**
-- NodeClass2.py : Model 1의 GCN.py와 util.py를 동일하게 사용하며, Input data 변경 관련한 수정
-  
-
+> - NodeClass2.py : Model 1의 GCN.py와 util.py를 동일하게 사용하며, Input data 변경 관련한 수정
+ 
 >
 
 
 ## **Failure Log**
 
 - 모델 1의 경우 id의 cluster값을 안다는 전제가 필요함 *-> Node Classification이라고 할 수 없음  
-Model 2의 경우 accuracy가 매우 낮은 것을 알 수 있음.
+- Model 2의 경우 accuracy가 매우 낮은 것을 알 수 있음.
 
 
 **개선에 관한 의견**
-
+> -
+> -
+> 
 
 
 
