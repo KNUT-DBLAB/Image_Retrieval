@@ -164,3 +164,6 @@ NodeClassification/NodeClassification/data/dataset.pickle
 NodeClassification/NodeClassification/data.zip
 NodeClassification/NodeClassific/data/dataset.pickle
 NodeClassification/NodeClassific/dum/data.zip
+GraphClassification/GraphClassifi/data/feature_model2.pickle
+NodeClassification/NodeClassific/data/feature_model2.pickle
+GraphClassification/GraphClassifi/data/dataset.pickle

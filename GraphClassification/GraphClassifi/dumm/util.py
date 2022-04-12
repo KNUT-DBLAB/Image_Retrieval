@@ -186,8 +186,6 @@ def adjColumn_kv(imgCount):
 def createAdj_model2(imageId, adjColumn, sceneGraph, objJson, ):
     adjM = np.zeros((len(adjColumn), len(adjColumn)))
     # 이미지 내 object, subject 끼리 list 만듦. 한 relationship에 objId, subId 하나씩 있음. Name은 X
-
-
     # imgId의 relationship에 따른 objId, subjId list
     # i는 image id
     # imageDescriptions = data[imageId-1]["relationships"]

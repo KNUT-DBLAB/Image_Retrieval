@@ -182,7 +182,7 @@ n_features = features.shape[1] #1433
 torch.manual_seed(34) #난수 생성 seed 설정
 #모델 정의
 model = GCN(nfeat=n_features,
-            nhid=20,  # hidden = 16
+            nhid=20,
             nclass=n_labels,
             dropout=0.5)  # dropout = 0.5
 

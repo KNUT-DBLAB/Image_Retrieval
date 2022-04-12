@@ -5,9 +5,9 @@ from openpyxl import Workbook
 from gensim.models import FastText
 from tqdm import tqdm
 from collections import Counter
-import YEmbedding
-from visual_genome import api
-import visual_genome_python_driver.visual_genome.local as lc
+#import YEmbedding
+#from visual_genome import api
+#import visual_genome_python_driver.visual_genome.local as lc
 import time
 import torch
 
@@ -199,7 +199,7 @@ def createAdj_model2(imageId, adjColumn, sceneGraph, objJson, ):
             adjM[adjSub][adjSub] += 1
         if (adjObj != '') & (adjSub != ''):
             adjM[adjObj][adjSub] += 1
-    adjM = torch.Tensor(adjM)
+   # adjM = torch.Tensor(adjM)
 
     return adjM
 

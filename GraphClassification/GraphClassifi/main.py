@@ -7,16 +7,31 @@ import torch.nn as nn
 import torch.optim as optim
 
 
+'''
+Model 2
+- Adj : id x id
+- Feature : img x (freObj x freObj) // 1000x(100x100)
+- Lable : 1000 x 1
+
+기존 GCN 코드를 이용해 Scene graph의 realationship이 반영된 GCN 모델 만들기
+-> 전처리 말고 직접적으로 모델을 여러 번 학습 시킬 순 없는지? 
+지금 사용하는 Adj는 cluster 값을 알아야만 가능한데 각 이미지를 학습시켜서는 안되는지?
+
+'''
+
+
+
 # gpu 사용
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
 features,adj, labels = ut.loadData() #데이터 불러옴
 idx_train, idx_val, idx_test = ut.splitDataset(34,200,300,len(features)) #train/val/test로 나눌 imageId를 가진 배열 return
-ut.toDevice(adj, features, labels, idx_train, idx_val, idx_test) # gpu면 gpu로 cpu면 cpu로~
+#ut.toDevice(adj, features, labels, idx_train, idx_val, idx_test) # gpu면 gpu로 cpu면 cpu로~
 
 
 n_labels = labels.max().item() + 1  # 15
-n_features = features.shape[1]  # 100
+#n_features = features.shape[1]  # 100
+n_features = len(features)  # 100
 # seed 고정
 torch.manual_seed(34)
 

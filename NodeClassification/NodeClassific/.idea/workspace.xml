@@ -5,11 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce4622fc-611d-45eb-8ee4-5e38aff1c1af" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/data/idAdj.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NodeClassi2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/GCN.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/GCN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/dumm/dummy3.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/dumm/dummy3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/dumm/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/dumm/util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/dumm/util2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/util2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/util.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../NodeClassification/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GCN.py" beforeDir="false" afterPath="$PROJECT_DIR$/GCN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dum/GCNCora.py" beforeDir="false" afterPath="$PROJECT_DIR$/dum/GCNCora.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dum/YEmbedding.py" beforeDir="false" afterPath="$PROJECT_DIR$/dum/YEmbedding.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dum/createTXT.py" beforeDir="false" afterPath="$PROJECT_DIR$/dum/createTXT.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dum/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/dum/util.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,21 +71,43 @@
       <recent name="C:\Semester2201\LAB\Image_Retrieval\NodeClassification\NodeClassific\dum" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
-    <configuration name="GNNNodeClassification" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.NodeClassi2">
+    <configuration name="GCN" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="NodeClassific" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\Haeun\AppData\Local\Programs\Python\Python39\python.exe" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Semester2201\LAB\Image_Retrieval\NodeClassification\NodeClassific\dum\GNNNodeClassification.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GCN.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="NodeClassi2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="NodeClassific" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NodeClassi2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -107,7 +138,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="YEmbedding" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="NodeClassific" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -115,12 +146,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dum" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dum/YEmbedding.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -129,7 +160,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="util" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="createTXT" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="NodeClassific" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -137,12 +168,34 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dum" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/util.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dum/createTXT.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="util (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="NodeClassific" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dum" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dum/util.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -153,15 +206,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.NodeClassification" />
-      <item itemvalue="Python.GNNNodeClassification" />
-      <item itemvalue="Python.main" />
-      <item itemvalue="Python.util" />
+      <item itemvalue="Python.createTXT" />
+      <item itemvalue="Python.YEmbedding" />
+      <item itemvalue="Python.util (1)" />
+      <item itemvalue="Python.NodeClassi2" />
+      <item itemvalue="Python.GCN" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
-        <item itemvalue="Python.util" />
-        <item itemvalue="Python.GNNNodeClassification" />
+        <item itemvalue="Python.NodeClassi2" />
+        <item itemvalue="Python.GCN" />
+        <item itemvalue="Python.createTXT" />
+        <item itemvalue="Python.util (1)" />
+        <item itemvalue="Python.YEmbedding" />
       </list>
     </recent_temporary>
   </component>
@@ -181,7 +238,8 @@
       <workItem from="1649729828027" duration="2045000" />
       <workItem from="1649746625010" duration="366000" />
       <workItem from="1649750192054" duration="926000" />
-      <workItem from="1649751416015" duration="52000" />
+      <workItem from="1649751416015" duration="7876000" />
+      <workItem from="1649763392974" duration="4264000" />
     </task>
     <servers />
   </component>
@@ -267,21 +325,62 @@
           <line>165</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GCN.py</url>
+          <line>35</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GCN.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GCN.py</url>
+          <line>20</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GCN.py</url>
+          <line>60</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GCN.py</url>
+          <line>62</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GCN.py</url>
+          <line>63</line>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NodeClassi2.py</url>
+          <line>53</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="output" />
+        <watch expression="support" />
       </configuration>
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/NodeClassific$GNNNodeClassification.coverage" NAME="GNNNodeClassification Coverage Results" MODIFIED="1649750357329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/NodeClassifi$d.coverage" NAME="d Coverage Results" MODIFIED="1649686461235" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/NodeClassific$util.coverage" NAME="util Coverage Results" MODIFIED="1649750658779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NodeClassifi$GCNCora.coverage" NAME="GCNCora Coverage Results" MODIFIED="1649725630551" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NodeClassific$util__1_.coverage" NAME="util (1) Coverage Results" MODIFIED="1649754923547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dum" />
+    <SUITE FILE_PATH="coverage/NodeClassific$NodeClassi2.coverage" NAME="NodeClassi2 Coverage Results" MODIFIED="1649767451117" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NodeClassific$YEmbedding.coverage" NAME="YEmbedding Coverage Results" MODIFIED="1649754825311" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dum" />
+    <SUITE FILE_PATH="coverage/NodeClassific$createTXT.coverage" NAME="createTXT Coverage Results" MODIFIED="1649759081478" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dum" />
+    <SUITE FILE_PATH="coverage/NodeClassific$GCN.coverage" NAME="GCN Coverage Results" MODIFIED="1649765589108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NodeClassifi$d.coverage" NAME="d Coverage Results" MODIFIED="1649686461235" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/NodeClassific$main.coverage" NAME="main Coverage Results" MODIFIED="1649750864390" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/NodeClassification$NodeClassification.coverage" NAME="NodeClassification Coverage Results" MODIFIED="1649746754320" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/NodeClassifi$GCNCora.coverage" NAME="GCNCora Coverage Results" MODIFIED="1649725630551" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/NodeClassifi$GCNCora__1_.coverage" NAME="GCNCora (1) Coverage Results" MODIFIED="1649728661778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/NodeClassifi$GNNNodeClassification.coverage" NAME="GNNNodeClassification Coverage Results" MODIFIED="1649730867783" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/NodeClassification$GNNNodeClassification.coverage" NAME="GNNNodeClassification Coverage Results" MODIFIED="1649746853374" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

@@ -1,27 +1,18 @@
 # https://github.com/fahim-sikder/Node-Classification-GCN/blob/master/pytorch-GCN.ipynb
+import sys
 
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-import numpy as np
 import numpy as np
 import torch
-import math
-from torch.nn.parameter import Parameter
-from torch.nn.modules.module import Module
-import torch.nn as nn
 import torch.nn.functional as F
 import time
-import torch.optim as optim
 # import pandas as pd
 from scipy.sparse import csr_matrix
-from scipy.sparse import coo_matrix
 from scipy.sparse import diags
-from scipy.sparse import eye
-from pathlib import Path
-from functools import partial
-import sys
+import util2 as ut2
+import pickle
+
+'''GCN 학습 및 검증 관련 utility'''
+
 
 '''
 GNN Node Classification
@@ -51,7 +42,7 @@ def normalize(mx):
     return mx
 
 
-def loadData():
+def loadData_raw():
     features = csr_matrix(np.load('./data/idFreFeature.npy'), dtype=np.float32)  # csr_matrix : (1000,100)
     adj = torch.FloatTensor(np.load('./data/idAdj.npy'))  # tensor(1000,1000)
     features = csr_matrix(features)
@@ -113,7 +104,6 @@ def train(model, optimizer, features, adj, idx_train, labels):
 
     return loss.item(), acc
 
-
 # 평가
 def evaluate(idx, model, features, adj, labels):
     model.eval()
@@ -130,3 +120,51 @@ def accuracy(output, labels):  # output : tensor(200, 15), labels : tensor(200,)
     correct = preds.eq(labels).double()  # tensor (300,)
     correct = correct.sum()
     return correct / len(labels)
+
+
+
+
+
+
+
+
+
+#1000개 이미지에 대한 1000x(100x100) = imageId x (freObj x freObj) = (1000,10000) Feature map 생성
+def loadData():
+    with open("./data/feature_model2.pickle", "rb") as fr:
+        dataset = pickle.load(fr) #type(dataset) : list
+    #print(type(dataset))
+
+    #
+    # print(type(list(dataset[1])))
+    # print(type(torch.flatten(list(dataset[1]))))
+    # print(type(list(dataset[1])[0]))
+    #
+    #
+    # sys.exit()
+
+
+
+    features = []
+    for i in range(len(dataset)) :
+        features.append(list((dataset[i]).flatten()))
+
+
+    features = torch.FloatTensor(features)
+    adj = torch.FloatTensor(np.load('./data/idAdj.npy'))  # tensor(1000,1000)
+    testFile = open('./data/cluster.txt', 'r')  # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
+    readFile = testFile.readline()
+    label = (readFile[1:].replace("'", '').replace(' ', '').split(','))
+    labels = []
+    for i in range(1000):
+        labels.append(int(label[i]))
+    labels = torch.LongTensor(labels)  # <class 'torch.Tensor'> tensor(1000, ) int64
+
+    # floatTensor, floatTensor, LongTensor로 반환
+
+    return features, adj, labels
+
+features, adj, labels = loadData()
+
+
+
