@@ -59,10 +59,6 @@ for i in range(1000):
 labels = torch.LongTensor(labels)
 
 
-
-
-
-
 idx_train, idx_val, idx_test = ut.splitDataset(34,200,300,len(features)) #train/val/test로 나눌 imageId를 가진 배열 return
 ut.toDevice(adj, features, labels, idx_train, idx_val, idx_test) # gpu면 gpu로 cpu면 cpu로~
 
