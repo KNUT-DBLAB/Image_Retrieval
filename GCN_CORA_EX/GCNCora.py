@@ -23,6 +23,9 @@ from functools import partial
 import matplotlib
 
 
+#for commit
+
+
 # Running Environment 구축,
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')  # gpu 또는 cpu 설정
 path = Path('data/cora') #데이터의 path 설정
