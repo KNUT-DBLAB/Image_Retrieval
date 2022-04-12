@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/GCN_CORA_EX.iml" filepath="$PROJECT_DIR$/.idea/GCN_CORA_EX.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/GCNCoraEx.iml" filepath="$PROJECT_DIR$/.idea/GCNCoraEx.iml" />
     </modules>
   </component>
 </project>
