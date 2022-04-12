@@ -38,7 +38,7 @@
 > - Visual Genome Dataset 분석 내용 정리
 > - Visual Genome Dataset을 이용한 Node Classification Readme 정리
 > - Visual Genome Dataset 전처리 관련 Utility Readme 정리
-
+> - CoraGCN code를 이용한 Node Classification 학습 및 검증 -> data quality issus
 
 
 
