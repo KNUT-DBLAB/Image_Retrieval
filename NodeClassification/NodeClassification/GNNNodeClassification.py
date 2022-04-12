@@ -15,7 +15,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import time
 import torch.optim as optim
-import matplotlib.pyplot as plt
 import pandas as pd
 from scipy.sparse import csr_matrix
 from scipy.sparse import coo_matrix

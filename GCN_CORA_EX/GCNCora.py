@@ -111,7 +111,7 @@ idx_test = idx_test.to(device)
 # GCN Layer, single layer neural network
 class GraphConvolution(Module):
     # 매개 변수나 모듈등을 초기화 하는데 사용
-    def __init__(self, in_features, out_features, bias=True):
+    def __init__(self, in_features, out_features, bias=True):  
         super(GraphConvolution, self).__init__() #초기화
         self.in_features = in_features # 전체 클래스의 모든 함수 내에서 사용할 수 있는 초기화 변수를 정의하는데 사용
         self.out_features = out_features

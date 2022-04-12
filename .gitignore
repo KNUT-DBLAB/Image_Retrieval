@@ -162,3 +162,5 @@ cython_debug/
 #.idea/
 NodeClassification/NodeClassification/data/dataset.pickle
 NodeClassification/NodeClassification/data.zip
+NodeClassification/NodeClassific/data/dataset.pickle
+NodeClassification/NodeClassific/dum/data.zip

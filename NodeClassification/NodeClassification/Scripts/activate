@@ -44,7 +44,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV='C:\Semester2201\LAB\Image_Retrieval\NodeClassification\NodeClassifi'
+VIRTUAL_ENV='C:\Semester2201\LAB\Image_Retrieval\NodeClassification\NodeClassification'
 if ([ "$OSTYPE" = "cygwin" ] || [ "$OSTYPE" = "msys" ]) && $(command -v cygpath &> /dev/null) ; then
     VIRTUAL_ENV=$(cygpath -u "$VIRTUAL_ENV")
 fi

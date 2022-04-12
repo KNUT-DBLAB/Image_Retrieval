@@ -1,261 +1,130 @@
-import numpy as np
-import pandas as pd
-import json
+# https://github.com/fahim-sikder/Node-Classification-GCN/blob/master/pytorch-GCN.ipynb
 
 import torch
-from openpyxl import Workbook
-import util as ut
-from gensim.models import FastText
-from tqdm import tqdm
-import util as ut
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+import numpy as np
+import numpy as np
+import torch
+import math
+from torch.nn.parameter import Parameter
+from torch.nn.modules.module import Module
+import torch.nn as nn
+import torch.nn.functional as F
+import time
+import torch.optim as optim
+#import pandas as pd
+from scipy.sparse import csr_matrix
+from scipy.sparse import coo_matrix
+from scipy.sparse import diags
+from scipy.sparse import eye
+from pathlib import Path
+from functools import partial
+import sys
 
-np.set_printoptions(linewidth=np.inf)
-
-''' 1000개의 이미지에 존재하는 obj_id(중복 X) '''
-def adjColumn(imgCount):
-    with open('./data/scene_graphs.json') as file:  # open json file
-        data = json.load(file)
-        object = []
-        for i in range(imgCount):
-            imageDescriptions = data[i]["objects"]
-            for j in range(len(imageDescriptions)):  # 이미지의 object 개수만큼 반복
-                object.append(imageDescriptions[j]['object_id'])
-        scene_obj_id = sorted(list(set(object)))
-
-        return scene_obj_id
-
-''' adj 생성(이미지 하나에 대한) '''
-
-def createAdj(imageId, adjColumn):
-    adjM = np.zeros((len(adjColumn), len(adjColumn)))
-# 이미지 내 object, subject 끼리 list 만듦. 한 relationship에 objId, subId 하나씩 있음. Name은 X
-
-    with open('./data/scene_graphs.json') as file:  # open json file
-        data = json.load(file)
-        # imgId의 relationship에 따른 objId, subjId list
-        # i는 image id
-        # imageDescriptions = data[imageId-1]["relationships"]
-        imageDescriptions = data[imageId-1]["relationships"]
-        objectId = []
-        subjectId = []
-
-        for j in range(len(imageDescriptions)):  # 이미지의 object 개수만큼 반복
-            objectId.append(imageDescriptions[j]['object_id'])
-            subjectId.append(imageDescriptions[j]['subject_id'])
-        # object = sum(object, [])
-
-        # 이미지 하나의 obj랑 최빈 obj 랑 일치하는 게 있으면 1로 표시해서 특징 추출
-    # obj에서 각 id로 objName, subName 찾아서 리스트로 저장
-    with open('./data/objects.json') as file:  # open json file
-        data = json.load(file)
-        # 각 이미지 별로 obj, relationship 가져와서 인접 행렬을 만듦
-        # 해당 모듈은 이미지 하나에 대한 인접행렬 만듦
-        # imgId의 relationship에 따른 objId, subjId list
-        # i는 image id
-        # objectId = data[imgId][""]
-
-        # 한 이미지 내에서 사용되는 obj의 Id 와 이름 dict;  여러 관계 간 동일 obj가 사용되는 경우가 있기 때문
-        # subject의 id값을 넣었을 때 name이 제대로 나오는 지 확인 :
-        objects = data[imageId-1]["objects"]
-        allObjName = []
-        for i in range(len(objects)):
-            allObjName.append(([objects[i]['names'][0]], objects[i]['object_id']))
-            if not objects[i]['merged_object_ids'] != []:  # id 5090처럼 merged_object_id에 대해서도 추가해주면 좋을 듯
-                for i in range(len(objects[i]['merged_object_ids'])):
-                    allObjName.append(([objects[i]['merged_object_ids'][0]], objects[i]['object_id']))
-
-    objIdName = []
-    subIdName = []
-    for i in range(len(subjectId)):
-        objectName = ''
-        subjectName = ''
-        for mTuple in allObjName:
-            if objectId[i] in mTuple:
-                objectName = str(mTuple[0][0])
-            if subjectId[i] in mTuple:
-                subjectName = str(mTuple[0][0])
-            if (objectName != '') & (subjectName != ''):
-                objIdName.append(objectName)
-                subIdName.append(subjectName)
-
-    # 위에서 얻은 obj,subName List로 adjColumn인 freObj에서 위치를 찾음
-    for i in range(len(objIdName)):
-        adjObj = ''
-        adjSub = ''
-        if objIdName[i] in adjColumn:
-            adjObj = adjColumn.index(objIdName[i])
-            adjM[adjObj][adjObj] += 1
-        if subIdName[i] in adjColumn:
-            adjSub = adjColumn.index(subIdName[i])
-            adjM[adjSub][adjSub] += 1
-        if (adjObj != '') & (adjSub != ''):
-            adjM[adjObj][adjSub] += 1
-
-   # adjM = torch.Tensor(adjM)
-    return adjM
-
-
-''' 
-Y data 생성을 위해 image에 대한 text description을 이미지 별로 모음
-
-jsonpath : './data/region_descriptions.json'
-xlxspath : './data/image_regions.xlsx'
 '''
-def jsontoxml(imgCnt, jsonpath, xlsxpath) :
-    with open(jsonpath) as file:  # open json file
-        data = json.load(file)
-        wb = Workbook()  # create xlsx file
-        ws = wb.active  # create xlsx sheet
-        ws.append(['image_id', 'region_sentences'])
-        phrase = []
+GNN Node Classification
+dataset : Visual Genome.Scence graph 
 
-        q = 0
-        for i in data:
-            if q == imgCnt:
-                break
-            regions = i.get('regions')
-            imgId = regions[0].get('image_id')
-            k = 0
-            for j in regions:
-                if k == 7:
-                    break
-                phrase.append(j.get('phrase'))
-                k += 1
-            sentences = ','.join(phrase)
-            ws.append([imgId, sentences])
-            phrase = []
-            q += 1
-        wb.save(xlsxpath)
+Adj : id x id (같은 cluster 값을 갖는 경우 1로 체크함), 1000x1000
+Feature : id x freOBJ(해당 img에 FreOBJ가 있는 경우 1, 없는 경우 0)
+freObj : 대상이 되는 이미지 1000개의 Scene graph에서 가장 언급량이 많은 Obj 100개
+Label : 각 id 당 cluster 번호
+cluster는 bert-base-nli-mean-tokens를 이용해 15개의 클러스터로 분류했음
+-> 1000개의 region_graph의 phrase 값을 embedding 함
+-> 이 부분도 relationship이 잘 나타나지 않은 것 같아 아쉬움
+relationship을 더 잘 활용할 수 있는걸 하고싶음..
+
+'''
+
+# gpu 사용
+device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
 
-''' obj name 단순 임베딩(fasttext로 임베딩 한 값)'''
-def objNameEmbedding(xWords) :
-    a = []
-    a.append(xWords)
-  #  model = FastText(a, vector_size=10, workers=4, sg=1, word_ngrams=1)
-    model = FastText(xWords, vector_size=10, workers=4, sg=1, word_ngrams=1)
+def normalize(mx):
+    rowsum = np.array(mx.sum(1))
+    r_inv = (rowsum ** -1).flatten()
+    r_inv[np.isinf(r_inv)] = 0.
+    r_mat_inv = diags(r_inv)
+    mx = r_mat_inv.dot(mx)
+    return mx
 
-    # for i in a :
-    embedding = []
-    for i in xWords:
-        embedding.append(model.wv[i])
+def loadData() :
+    features = csr_matrix(np.load('./data/idFreFeature.npy'), dtype=np.float32)  # csr_matrix : (1000,100)
+    adj = torch.FloatTensor(np.load('./data/idAdj.npy'))  # tensor(1000,1000)
+    features = csr_matrix(features)
+    
+    features = normalize(features)
+    
+    testFile = open('./data/cluster.txt', 'r')  # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
+    readFile = testFile.readline()
+    label = (readFile[1:].replace("'", '').replace(' ', '').split(','))
+    labels = []
+    for i in range(1000):
+        labels.append(int(label[i]))
 
-    return embedding
-
-
-''' 1000개의 이미지에 존재하는 obj_name(중복 X) > Featuremap object_name Embedding 원본
-    object_id, object_name의 개수가 일치하지 않는 문제 -> 동일 id에 이름 두 개씩 들어가 있는 경우 발견
-    -> 이름을 합침 '''
-
-def adjColumn_kv(imgCount):
-    with open('./data/scene_graphs.json') as file:  # open json file
-        data = json.load(file)
-        dict = {}
-        # dict 생성(obj_id : obj_name)
-        for i in range(imgCount):
-            imageDescriptions = data[i]["objects"]
-            for j in range(len(imageDescriptions)):  # 이미지의 object 개수만큼 반복
-                obj_id = imageDescriptions[j]['object_id']
-                if (len(imageDescriptions[j]['names']) != 1):
-                    wholeName = str()
-                    for i in range(len(imageDescriptions[j]['names'])):
-                        wholeName += imageDescriptions[j]['names'][i]
-                    lista = []
-                    lista.append(wholeName.replace(' ', ''))
-                    obj_name = lista
-                else:
-                    obj_name = imageDescriptions[j]['names']
-
-                dict[obj_id] = obj_name
-            #  print(obj_id)
-            #  print(obj_name)
-
-        keys = sorted(dict)
-        val = []
-
-        for i in keys:
-            if (type(dict[i]) == str):
-                val += (dict[i])
-
-            val += dict[i]
-        return keys, val
+    features = torch.FloatTensor(
+        features.todense())  # <class 'torch.Tensor'> (1000,100), sparseMatrix -> Tensor Matrix, torch.float32
+    labels = torch.LongTensor(labels)  # <class 'torch.Tensor'> tensor(1000, ) int64
+    
+    # floatTensor, floatTensor, LongTensor로 반환
+    
+    return features, adj, labels
 
 
+#난수 seed 값, 개수들. 단순 랜덤 int 값 배열 반환이니까~(image id로 사용할)
+def splitDataset(seed, n_train, n_val, n_features) :
+    # dataset train/test/val로 나눔
+    np.random.seed(seed)
+    n_train = n_train
+    n_val = n_val
+    n_test = n_features - n_train - n_val  # 500
+    idxs = np.random.permutation(n_features)
+    idx_train = torch.LongTensor(idxs[:n_train])
+    idx_val = torch.LongTensor(idxs[n_train:n_train + n_val])
+    idx_test = torch.LongTensor(idxs[n_train + n_val:])
+    
+    return idx_train, idx_val, idx_test
 
 
-def createAdj_model2(imageId, adjColumn, sceneGraph, objJson, ):
-    adjM = np.zeros((len(adjColumn), len(adjColumn)))
-    # 이미지 내 object, subject 끼리 list 만듦. 한 relationship에 objId, subId 하나씩 있음. Name은 X
+# cuda.. gpu로 보냄
+def toDevice(adj, features, labels,idx_train, idx_val, idx_test) :
+    adj = adj.to(device)
+    features = features.to(device)
+    labels = labels.to(device)
+    idx_train = idx_train.to(device)
+    idx_val = idx_val.to(device)
+    idx_test = idx_test.to(device)
+
+#학습
+#def step():
+def train():
+    t = time.time()
+    model.train()  # model 학습모드로
+    optimizer.zero_grad()
+    output = model(features, adj)  # model에 값 넣음  tensor(1000,15)
+    loss = F.nll_loss(output[idx_train], labels[idx_train])  # loss 함수   tensor, torch.float32
+    acc = accuracy(output[idx_train], labels[idx_train])  # accuracy 파악
+    loss.backward()
+    optimizer.step()
+
+    return loss.item(), acc
 
 
-    # imgId의 relationship에 따른 objId, subjId list
-    # i는 image id
-    # imageDescriptions = data[imageId-1]["relationships"]
-    imageDescriptions = sceneGraph[imageId - 1]["relationships"]
-    objectId = []
-    subjectId = []
+# 평가
+def evaluate(idx):
+    model.eval()
+    output = model(features, adj)  # 모델 돌림
+    loss = F.nll_loss(output[idx], labels[idx])  # 모델이 분류한 값과 label 비교해서 loss 파악
+    acc = accuracy(output[idx], labels[idx])
 
-    for j in range(len(imageDescriptions)):  # 이미지의 object 개수만큼 반복
-        objectId.append(imageDescriptions[j]['object_id'])
-        subjectId.append(imageDescriptions[j]['subject_id'])
-    # object = sum(object, [])
-
-    # 이미지 하나의 obj랑 최빈 obj 랑 일치하는 게 있으면 1로 표시해서 특징 추출
-    # obj에서 각 id로 objName, subName 찾아서 리스트로 저장
-    # 각 이미지 별로 obj, relationship 가져와서 인접 행렬을 만듦
-    # 해당 모듈은 이미지 하나에 대한 인접행렬 만듦
-    # imgId의 relationship에 따른 objId, subjId list
-    # i는 image id
-    # objectId = data[imgId][""]
-
-    # 한 이미지 내에서 사용되는 obj의 Id 와 이름 dict;  여러 관계 간 동일 obj가 사용되는 경우가 있기 때문
-    # subject의 id값을 넣었을 때 name이 제대로 나오는 지 확인 :
-    objects = objJson[imageId - 1]["objects"]
-    allObjName = []
-    for i in range(len(objects)):
-        allObjName.append(([objects[i]['names'][0]], objects[i]['object_id']))
-        if not objects[i]['merged_object_ids'] != []:  # id 5090처럼 merged_object_id에 대해서도 추가해주면 좋을 듯
-            for i in range(len(objects[i]['merged_object_ids'])):
-                allObjName.append(([objects[i]['merged_object_ids'][0]], objects[i]['object_id']))
-
-    objIdName = []
-    subIdName = []
-    for i in range(len(subjectId)):
-        objectName = ''
-        subjectName = ''
-        for mTuple in allObjName:
-            if objectId[i] in mTuple:
-                objectName = str(mTuple[0][0])
-            if subjectId[i] in mTuple:
-                subjectName = str(mTuple[0][0])
-            if (objectName != '') & (subjectName != ''):
-                objIdName.append(objectName)
-                subIdName.append(subjectName)
-    # 위에서 얻은 obj,subName List로 adjColumn인 freObj에서 위치를 찾음
-    for i in range(len(objIdName)):
-        adjObj = ''
-        adjSub = ''
-        if objIdName[i] in adjColumn:
-            adjObj = adjColumn.index(objIdName[i])
-            adjM[adjObj][adjObj] += 1
-        if subIdName[i] in adjColumn:
-            adjSub = adjColumn.index(subIdName[i])
-            adjM[adjSub][adjSub] += 1
-        if (adjObj != '') & (adjSub != ''):
-            adjM[adjObj][adjSub] += 1
-    adjM = torch.Tensor(adjM)
-
-    return adjM
+    return loss.item(), acc
 
 
-
-''' 
-feature matrix 2안 
-scene graph에서 object-predicate-subject를 scenetence로 묶어서 임베딩 
--> 질문 : 이때 각 단어에 대한 임베딩은 어케 구할건지? 
-    일일이 비교해서 구해야 하는지? 
-    word가 아니고 phrase인 경우에는? 
-    padding?
-    '''
-
-
+# 정확도
+def accuracy(output, labels): #output : tensor(200, 15), labels : tensor(200,)
+    preds = output.max(1)[1].type_as(labels)  # 비슷하다고 뽑은 것들중에 제일 비슷한 거
+    correct = preds.eq(labels).double()  #tensor (300,)
+    correct = correct.sum()
+    return correct / len(labels)

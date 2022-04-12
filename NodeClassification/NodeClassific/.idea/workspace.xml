@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ce4622fc-611d-45eb-8ee4-5e38aff1c1af" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/GCN.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/dumm/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/dumm/util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GCN.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GCN_CORA_EX/GCNCora.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GCN_CORA_EX/GCNCora.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/GCNNodeClas.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/dumm/GCNNodeClas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/YEmbedding.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/dumm/YEmbedding.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/check2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/dumm/check2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/dummy3.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/dumm/dummy3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/fileCreater.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/dumm/fileCreater.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/graphClassification.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/dumm/graphClassification.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/util2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GraphClassification/GraphClassifi/dumm/util2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/GNNNodeClassification.py" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/GNNNodeClassification.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/activate" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/activate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/activate.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/activate.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/activate.fish" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/activate.fish" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/activate.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/activate.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/activate.xsh" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/activate.xsh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/activate_this.py" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/activate_this.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/convert-caffe2-to-onnx.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/convert-caffe2-to-onnx.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/convert-onnx-to-caffe2.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/convert-onnx-to-caffe2.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/f2py.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/f2py.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/fonttools.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/pip-3.9.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/pip-3.9.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/pip.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/pip.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/pip3.9.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/pip3.9.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/pip3.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/pip3.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/pyftmerge.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/pyftsubset.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/torchrun.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/torchrun.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/ttx.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/wheel-3.9.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/wheel-3.9.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/wheel.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/wheel.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/wheel3.9.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/wheel3.9.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/Scripts/wheel3.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeClassification/Scripts/wheel3.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NodeClassification/share/man/man1/ttx.1" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="27PWgk9ktv0CkeBlapNjRQLqjJb" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Semester2201\LAB\Image_Retrieval\NodeClassification\NodeClassific" />
+      <recent name="C:\Semester2201\LAB\Image_Retrieval\NodeClassification\NodeClassifi" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Semester2201\LAB\Image_Retrieval\NodeClassification\NodeClassific" />
+      <recent name="C:\Semester2201\LAB\Image_Retrieval\NodeClassification\NodeClassific\dum" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="GNNNodeClassification" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Haeun\AppData\Local\Programs\Python\Python39\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="C:\Semester2201\LAB\Image_Retrieval\NodeClassification\NodeClassific\dum\GNNNodeClassification.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="NodeClassification" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Haeun\AppData\Local\Programs\Python\Python39\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="NodeClassific" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="util" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="NodeClassific" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/util.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.NodeClassification" />
+      <item itemvalue="Python.GNNNodeClassification" />
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.util" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.util" />
+        <item itemvalue="Python.GNNNodeClassification" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ce4622fc-611d-45eb-8ee4-5e38aff1c1af" name="Changes" comment="" />
+      <created>1649222315003</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1649222315003</updated>
+      <workItem from="1649222317709" duration="975000" />
+      <workItem from="1649328578318" duration="1853000" />
+      <workItem from="1649416184543" duration="871000" />
+      <workItem from="1649669034956" duration="17028000" />
+      <workItem from="1649725367130" duration="3622000" />
+      <workItem from="1649729828027" duration="2045000" />
+      <workItem from="1649746625010" duration="366000" />
+      <workItem from="1649750192054" duration="662000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TerminalProjectNonSharedOptionsProvider">
+    <envs>
+      <env key="gnnNodeclassification" value="" />
+    </envs>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dum/GNNNodeClassification.py</url>
+          <line>65</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dum/GNNNodeClassification.py</url>
+          <line>127</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dum/GNNNodeClassification.py</url>
+          <line>128</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dum/GNNNodeClassification.py</url>
+          <line>144</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dum/GNNNodeClassification.py</url>
+          <line>143</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dum/GNNNodeClassification.py</url>
+          <line>242</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dum/GNNNodeClassification.py</url>
+          <line>246</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dum/GNNNodeClassification.py</url>
+          <line>184</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dum/GNNNodeClassification.py</url>
+          <line>175</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dum/GNNNodeClassification.py</url>
+          <line>163</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dum/GNNNodeClassification.py</url>
+          <line>164</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dum/GNNNodeClassification.py</url>
+          <line>165</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="output" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/NodeClassific$GNNNodeClassification.coverage" NAME="GNNNodeClassification Coverage Results" MODIFIED="1649750357329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NodeClassifi$d.coverage" NAME="d Coverage Results" MODIFIED="1649686461235" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NodeClassific$util.coverage" NAME="util Coverage Results" MODIFIED="1649750658779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NodeClassific$main.coverage" NAME="main Coverage Results" MODIFIED="1649750830413" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NodeClassification$NodeClassification.coverage" NAME="NodeClassification Coverage Results" MODIFIED="1649746754320" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/NodeClassifi$GCNCora.coverage" NAME="GCNCora Coverage Results" MODIFIED="1649725630551" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NodeClassifi$GCNCora__1_.coverage" NAME="GCNCora (1) Coverage Results" MODIFIED="1649728661778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NodeClassifi$GNNNodeClassification.coverage" NAME="GNNNodeClassification Coverage Results" MODIFIED="1649730867783" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NodeClassification$GNNNodeClassification.coverage" NAME="GNNNodeClassification Coverage Results" MODIFIED="1649746853374" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>

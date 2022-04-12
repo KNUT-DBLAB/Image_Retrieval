@@ -1,6 +1,6 @@
 @echo off
 
-set "VIRTUAL_ENV=C:\Semester2201\LAB\Image_Retrieval\NodeClassification\NodeClassifi"
+set "VIRTUAL_ENV=C:\Semester2201\LAB\Image_Retrieval\NodeClassification\NodeClassification"
 
 if defined _OLD_VIRTUAL_PROMPT (
     set "PROMPT=%_OLD_VIRTUAL_PROMPT%"
