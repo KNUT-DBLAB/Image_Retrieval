@@ -1,3 +1,19 @@
+# NodeClassification
+Visual Genome을 사용한 Node classfication 모델
+
+---
+
+- sub와 obj  간에 relationship이 반영이 되지 않은 모델
+- input data format
+  - Adj : id x id (같은 cluster 값을 갖는 경우 1로 체크함) // 1000x1000
+  - Feature : id x freObj(해당 img에 FreOBJ가 있는 경우 1, 없는 경우 0) // 1000x100
+  - freObj : 대상이 되는 이미지 1000개의 Scene graph에서 가장 언급량이 많은 Obj 100개
+  - Label : 각 id 당 cluster 번호 // 1000x1
+
+---
+
+-> 하은씨 수정해주세요~
+
 GNN Node Classification.py(/GCN0411)   
 dataset : Visual Genome.Scence graph   
  
