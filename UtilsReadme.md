@@ -78,10 +78,12 @@
 
 ## YEmbedding
 1000개의 이미지 별로 region_graph 의 phrase 값을 embedding 하고, 각 이미지를 15개의 클러스터로 분류함
+하단 링크의 bert-base-nli-mean-tokens 사용
+ref) https://github.com/marialymperaiou/visual-genome-embeddings
 
 >  
 -------
-
+### 모델 별 사용 함수
 Node Classification - Adj, Feature
 - model 1 : create_adjMatrix(), featuremap()
 - model 2 : featuremap(), objNameEmbedding()
