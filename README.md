@@ -5,12 +5,16 @@
 #### torch를 이용한 GNN 구현
 - 학습 데이터 전처리
   - Visual Genome을 이용하여 학습 데이터 생성
-- GNN 모델 확인 및 테스트
-  - 기존 GCN 모델 동작원리 확인
-  - 기존 GCN 모델 코드 리뷰
+- GNN 모델 확인 및 테스트(~4.11)
+  - Cora dataset을 이용하여 기존 GNN 모델 공부
+  - 기존 GNN 모델의 사용하는 input data 형태 확인
 - 학습 및 검증
   - 학습 데이터와 기존 GNN 모델인 GCN을 이용하여 유사 이미지 분류
   - Accuracy 및 Loss 확인 및 검증
+  ```
+  - GraphClassficiation
+  - NodeClassification
+  ```
 ---
 
 ## 2. Issue
