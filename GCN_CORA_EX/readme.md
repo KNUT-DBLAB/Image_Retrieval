@@ -10,7 +10,7 @@
 > **cora.content** : <논문 id> <논문 feature값> < label >  →  ndarray(2078, 1435)  
   
   
----- 
+
   
 
 ## Data Preprocessing
@@ -19,7 +19,7 @@
 > **FeatureMatrix** : id x feature    → tensor(2708, 1433)  
 > **Y** : labels                      → tensor(2708, )   
 > 
-----
+
 > 
 ## GCN Model   
   
