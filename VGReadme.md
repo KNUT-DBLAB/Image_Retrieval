@@ -16,7 +16,7 @@ https://visualgenome.org/
 
 
 ### region_graph.json
-- 각 이미지의 범위에 대한 설명(Phrase)를 사용해 Image를 Cluster로 분류할 때 사용함 -> util readme  참고 
+- 각 이미지의 범위에 대한 설명(Phrase)를 사용해 Image를 Cluster로 분류할 때 사용함 -> [util readme  참고](https://github.com/Hanin00/Image_Retrieval/blob/73f0217105e55576bde127848e787a22f0716dc0/UtilsReadme.md)
 - Object는 Object name이 아닌 id로만 제공됨  
 
 <img src="https://github.com/Hanin00/Image_Retrieval/blob/82326deea0e8b8e4092b23ca5b8116548a6f8054/extraImages/region_graphJsonStructure.PNG">
