@@ -10,11 +10,9 @@
   - 기존 GNN 모델의 사용하는 input data 형태 확인
 - 학습 및 검증
   - 학습 데이터와 기존 GNN 모델인 GCN을 이용하여 유사 이미지 분류
+    - GraphClassficiation (~4.13)
+    - NodeClassification (~4.15)
   - Accuracy 및 Loss 확인 및 검증
-  ```
-  - GraphClassficiation
-  - NodeClassification
-  ```
 ---
 
 ## 2. Issue
