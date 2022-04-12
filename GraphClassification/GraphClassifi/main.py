@@ -4,6 +4,7 @@ import util as ut
 from torch.nn.modules.module import Module
 import torch.nn as nn
 #import pandas as pd
+import torch.optim as optim
 
 
 # gpu 사용
@@ -35,13 +36,13 @@ val_loss, val_acc = [], []
 
 
 for i in range(epochs):
-    tl, ta = ut.train()
+    tl, ta = ut.train(model,optimizer,features, adj, idx_train,labels)
     train_loss += [tl]
     train_acc += [ta]
 
     if ((i + 1) % print_steps) == 0 or i == 0:
-        tl, ta = evaluate(idx_train)
-        vl, va = evaluate(idx_val)
+        tl, ta = ut.evaluate(idx_train, model,features, adj,labels)
+        vl, va = ut.evaluate(idx_train, model,features, adj,labels)
         val_loss += [vl]
         val_acc += [va]
 
