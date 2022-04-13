@@ -65,13 +65,12 @@
 ## **Failure Log**
 
 - 모델 1의 경우 id의 cluster값을 안다는 전제가 필요함 *-> Node Classification이라고 할 수 없음  
-- Model 2의 경우 accuracy가 매우 낮은 것을 알 수 있음.
+- Model 2의 경우 accuracy가 매우 낮은 것을 알 수 있음
 
 
 **개선에 관한 의견**
-> -
-> -
-> 
+> - 아래 그림은 id 값에 따른 freObj의 분포를 Seaborn의 Heatmap을 이용해 구현한 도표임   같이 데이터의 특징이 고루 분포하지 않고 뚜력하게 분류되지 않음을 알 수 있음  데이터 전처리 개선 또는 특징을 더 반영할 수 있는 Feature Map이 필요함
+> <img src= "https://github.com/Hanin00/Image_Retrieval/blob/598abc6b1d7eb0ab8d777ee686156dcd514051a8/extraImages/dataHeatMap.png">
 
 
 
