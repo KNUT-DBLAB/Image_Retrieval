@@ -1,10 +1,14 @@
+import sys
 import GCN as md
 import torch
 import util as ut
+import util2 as ut2
 from torch.nn.modules.module import Module
 import torch.nn as nn
 #import pandas as pd
 import torch.optim as optim
+import pickle
+import torch.nn.functional as F
 
 
 '''
@@ -24,14 +28,42 @@ Model 2
 # gpu 사용
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
-features,adj, labels = ut.loadData() #데이터 불러옴
-idx_train, idx_val, idx_test = ut.splitDataset(34,200,300,len(features)) #train/val/test로 나눌 imageId를 가진 배열 return
+#Adj
+## Load pickle -> Image의 freObj x freObj 로 만든 AdjacencyMatrix 1000개 List
+with open("./data/frefre1000.pickle", "rb") as fr:
+    data = pickle.load(fr)
+ImageAdjs = data
+
+#Features
+testFile = open('./data/freObj.txt','r') # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
+readFile = testFile.readline()
+freObj = (readFile[1:-1].replace("'",'')).split(',')
+features = ut2.objNameEmbedding(freObj[:100])
+features = torch.FloatTensor(features)
+
+#Y - labels, (1000, )
+testFile = open('./data/cluster.txt', 'r')  # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
+readFile = testFile.readline()
+label = (readFile[1:].replace("'", '').replace(' ', '').split(','))
+labels = []
+for i in range(1000):
+   labels.append(int(label[i]))
+
+labels = torch.IntTensor(labels)
+
+
+dataset = []
+dataset.append(ImageAdjs)
+dataset.append(labels)
+
+
+
+idx_train, idx_val, idx_test = ut.splitDataset(34,200,300,len(ImageAdjs)) #train/val/test로 나눌 imageId를 가진 배열 return
 #ut.toDevice(adj, features, labels, idx_train, idx_val, idx_test) # gpu면 gpu로 cpu면 cpu로~
 
-
 n_labels = labels.max().item() + 1  # 15
-#n_features = features.shape[1]  # 100
-n_features = len(features)  # 100
+n_features = features.shape[1]  # 10
+
 # seed 고정
 torch.manual_seed(34)
 
@@ -49,22 +81,63 @@ print_steps = 100
 train_loss, train_acc = [], []
 val_loss, val_acc = [], []
 
+criterion = nn.CrossEntropyLoss() # 손실함수 정의
 
+# Train 함수 사용하지 말고, iterator로 graph 와 Y value 넣어서 학습 시키면 될 듯?
 for i in range(epochs):
-    tl, ta = ut.train(model,optimizer,features, adj, idx_train,labels)
-    train_loss += [tl]
-    train_acc += [ta]
+    total_loss = 0
+    for j in range(len(ImageAdjs)) :
+        model.train()
+        adj = ImageAdjs[j]
+        label = labels[j]
+        optimizer.zero_grad()
+        outputs = model(features,adj)
+        predictLabel = outputs.argmax(1)[0]
+        loss = F.nll_loss(predictLabel, label)
+        loss.backward()
+        optimizer.step()
 
-    if ((i + 1) % print_steps) == 0 or i == 0:
-        tl, ta = ut.evaluate(idx_train, model,features, adj,labels)
-        vl, va = ut.evaluate(idx_train, model,features, adj,labels)
-        val_loss += [vl]
-        val_acc += [va]
+        if (i + 1) % 20 == 0:
+            print(f'Epoch: {epoch} - Loss: {loss:.6f}')
 
-        print(
-            'Epochs: {}, Train Loss: {:.3f}, Train Acc: {:.3f}, Validation Loss: {:.3f}, Validation Acc: {:.3f}'.format(
-                i, tl, ta, vl, va))
+        val_loss = []
+        val_acc = []
+        # 모델 검증
+        for i, (images, targets) in enumerate(valid_loader):
+            model.eval()
+            images, targets = images.to('cuda'), targets.to('cuda')
 
+            with torch.no_grad():
+                outputs = model(images)
+                valid_loss = criterion(outputs, targets).cpu().detach().numpy()
+
+                preds = torch.argmax(outputs, axis=1)
+                preds = preds.cpu().detach().numpy()
+
+                targets = targets.cpu().detach().numpy()
+                batch_acc = (preds == targets).mean()
+
+                val_loss.append(valid_loss)
+                val_acc.append(batch_acc)
+
+        val_loss = np.mean(val_loss)
+        val_acc = np.mean(val_acc)
+
+        print(f'Epoch: {epoch} - valid Loss: {val_loss:.6f} - valid_acc : {val_acc:.6f}')
+
+        if valid_loss_min > val_loss:
+            valid_loss_min = val_loss
+            best_models.append(model)
+
+    # Learning rate 조절
+    lr_scheduler.step()
+
+
+
+
+
+
+'''
 output = model(features, adj)
 
 # test
@@ -88,3 +161,4 @@ df = pd.DataFrame({'Real': [idx2lbl[e] for e in labels[idx_sample].tolist()],
 # tolist()로 각 feature 별 model의 output 값을 받음
 # for 문을 통해 idx2Lble에서 해당하는 label을 반환받음.
 print(df)
+'''

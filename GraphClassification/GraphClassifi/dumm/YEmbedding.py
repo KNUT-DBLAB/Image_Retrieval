@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import numpy as np
-from visual_genome import api as vg
+#from visual_genome import api as vg
 import urllib.request
 from PIL import Image
 import nltk

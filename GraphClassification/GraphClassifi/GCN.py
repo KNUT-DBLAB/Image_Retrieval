@@ -9,7 +9,6 @@ import torch.nn.functional as F
 
 
 
-
 # Model
 class GraphConvolution(Module):
     def __init__(self, in_features, out_features, bias=True):
@@ -62,6 +61,6 @@ class GCN(nn.Module):   #nhid : 20, nfeat : 100, self : GCN(), nclass : 15, drop
     def forward(self, x, adj):
         x = F.relu(self.gc1(x, adj))
         x = F.dropout(x, self.dropout, training=self.training)
-        x = self.gc2(x, adj.T)
+        x = self.gc2(x,adj )
 
         return F.log_softmax(x, dim=1)

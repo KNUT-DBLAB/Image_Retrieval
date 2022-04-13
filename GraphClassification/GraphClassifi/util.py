@@ -135,16 +135,6 @@ def loadData():
         dataset = pickle.load(fr) #type(dataset) : list
     #print(type(dataset))
 
-    #
-    # print(type(list(dataset[1])))
-    # print(type(torch.flatten(list(dataset[1]))))
-    # print(type(list(dataset[1])[0]))
-    #
-    #
-    # sys.exit()
-
-
-
     features = []
     for i in range(len(dataset)) :
         features.append(list((dataset[i]).flatten()))
