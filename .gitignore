@@ -170,3 +170,6 @@ NodeClassification/NodeClassific/data/feature_model2.pickle
 GraphClassification/GraphClassifi/data/dataset.pickle
 =======
 >>>>>>> upstream/master
+NodeClassification/data/dataset.pickle
+NodeClassification/data/feature_model2.pickle
+NodeClassification/dum/data.zip
