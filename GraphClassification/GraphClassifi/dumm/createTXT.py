@@ -264,14 +264,6 @@ import torch
 # freObjEmbedding = torch.tensor(freObjEmbedding)
 
 
-
-
-
-
-
-
-
-
 ''' image 별로 freObjxfreObj 만들어서 dataset 만듦'''
 ''' id, Adj, label List 만드는 코드 '''
 # 빈출 단어 값
@@ -302,16 +294,16 @@ dataset = []
 start = time.time()
 for i in range(1000):
     adj = ut.createAdj_model2(i, freObj,data1, data2)
-    dataset.append( adj)
+    dataset.append( [adj, label[i]])
 
 print("obj : ", time.time() - start)
 
 ## Save pickle
-with open("../data/frefre1000.pickle", "wb") as fw:
+with open("../data/graphDataset.pickle", "wb") as fw:
     pickle.dump(dataset, fw)
 
 ## Load pickle
-with open("../data/frefre1000.pickle", "rb") as fr:
+with open("../data/graphDataset.pickle", "rb") as fr:
     data = pickle.load(fr)
 print(data)
 

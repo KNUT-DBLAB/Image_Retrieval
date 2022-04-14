@@ -87,9 +87,11 @@ for i in range(epochs):
     tl, ta = ut.train(model,optimizer,features, adj, idx_train,labels)
     train_loss += [tl]
     train_acc += [ta]
-
     if ((i + 1) % print_steps) == 0 or i == 0:
         tl, ta = ut.evaluate(idx_train, model,features, adj,labels)
+        print(features.shape)
+        print("adj : ", adj)
+        print("adj : ", adj.shape)
         vl, va = ut.evaluate(idx_train, model,features, adj,labels)
         val_loss += [vl]
         val_acc += [va]

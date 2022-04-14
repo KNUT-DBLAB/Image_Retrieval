@@ -32,7 +32,7 @@ class GraphConvolution(Module):
             self.bias.data.uniform_(-stdv, stdv)
 
     def forward(self, input, adj):
-        support = torch.mm(input, self.weight)
+        support = torch.mm(input, self.weight)  #Tensor(100,20)
         output = torch.spmm(adj, support)
         if self.bias is not None:
             return output + self.bias
@@ -49,9 +49,9 @@ class GCN(nn.Module):   #nhid : 20, nfeat : 100, self : GCN(), nclass : 15, drop
     def __init__(self, nfeat, nhid, nclass, dropout):
         super(GCN, self).__init__()
         # self.gc1 = GraphConvolution(nfeat, nhid)
-        self.gc1 = GraphConvolution(nfeat, nclass)   #nhid : 20, nfeat : 100, self : GCN(), nclass : 15, dropout : 0.5
+        self.gc1 = GraphConvolution(nfeat, nhid)   #nhid : 20, nfeat : 100, self : GCN(), nclass : 15, dropout : 0.5
                                                     # out_features : 20, in_features : 100, self : unable to get repr for <class'__main__.GraphConvolution'>, bias : True
-        self.gc2 = GraphConvolution(nclass, nfeat)
+        self.gc2 = GraphConvolution(nhid, nclass)
 
         #nhid : 20, nfeat : 100, self : (gc1) : GraphConvolution(100->20), nclass : 15, dropout : 0.5
                                                      # in_features : 20, out_features : 15,  self : unable to get repr for <class'__main__.GraphConvolution'>, bias : True
@@ -59,8 +59,8 @@ class GCN(nn.Module):   #nhid : 20, nfeat : 100, self : GCN(), nclass : 15, drop
 
     # X : 초기 랜덤값 -> 학습 하면서 변경
     def forward(self, x, adj):
-        x = F.relu(self.gc1(x, adj))
+        x = F.relu(self.gc1(x, adj)) # adj : (100,) -> 100x100아니라서 문제생기는 듯?    self : GCN(Gc1 : Graph Convolution (10->20), GC2) Gc(20->15)
         x = F.dropout(x, self.dropout, training=self.training)
         x = self.gc2(x,adj )
-
         return F.log_softmax(x, dim=1)
+        #return F.log_softmax(x, dim=1)

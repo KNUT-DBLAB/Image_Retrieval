@@ -62,7 +62,7 @@ class GCN(nn.Module):   #nhid : 20, nfeat : 100, self : GCN(), nclass : 15, drop
         x = F.relu(self.gc1(x , adj)) #adj : (1000,100),
         x = F.dropout(x, self.dropout, training=self.training)
         #x = self.gc2(x, adj.T) #주석하면~ 1000x100
-        x = self.gc2(x, torch.ones(1000,1000)) #주석하면~ 1000x100
+        x = self.gc2(x, torch.ones(1000,1000))
 
 
         return F.log_softmax(x, dim=1)

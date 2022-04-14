@@ -105,6 +105,7 @@ def train(model, optimizer,features, adj,idx_train,labels):
     optimizer.zero_grad()
     output = model(features, adj)  # model에 값 넣음  tensor(1000,15)
     loss = F.nll_loss(output[idx_train], labels[idx_train])  # loss 함수   tensor, torch.float32
+
     acc = accuracy(output[idx_train], labels[idx_train])  # accuracy 파악
     loss.backward()
     optimizer.step()
@@ -116,7 +117,8 @@ def train(model, optimizer,features, adj,idx_train,labels):
 def evaluate(idx,model, features, adj,labels):
     model.eval()
     output = model(features, adj)  # 모델 돌림
-    loss = F.nll_loss(output[idx], labels[idx])  # 모델이 분류한 값과 label 비교해서 loss 파악
+    loss = F.nll_loss(output[idx], labels[idx]) # 모델이 분류한 값과 label 비교해서 loss 파악
+
     acc = accuracy(output[idx], labels[idx])
 
     return loss.item(), acc

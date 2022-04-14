@@ -5,11 +5,13 @@ import util as ut
 import util2 as ut2
 from torch.nn.modules.module import Module
 import torch.nn as nn
-#import pandas as pd
+# import pandas as pd
 import torch.optim as optim
 import pickle
 import torch.nn.functional as F
+import numpy as np
 
+# cnn Image Classification - https://ariz1623.tistory.com/302
 
 '''
 Model 2
@@ -23,43 +25,38 @@ Model 2
 
 '''
 
-
+with open("./data/graphDataset.pickle", "rb") as fr:
+    data = pickle.load(fr)
+dataset = data
 
 # gpu 사용
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
-#Adj
+# Adj
 ## Load pickle -> Image의 freObj x freObj 로 만든 AdjacencyMatrix 1000개 List
 with open("./data/frefre1000.pickle", "rb") as fr:
     data = pickle.load(fr)
 ImageAdjs = data
 
-#Features
-testFile = open('./data/freObj.txt','r') # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
+# Features
+testFile = open('./data/freObj.txt', 'r')  # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
 readFile = testFile.readline()
-freObj = (readFile[1:-1].replace("'",'')).split(',')
+freObj = (readFile[1:-1].replace("'", '')).split(',')
 features = ut2.objNameEmbedding(freObj[:100])
 features = torch.FloatTensor(features)
 
-#Y - labels, (1000, )
+# Y - labels, (1000, )
 testFile = open('./data/cluster.txt', 'r')  # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
 readFile = testFile.readline()
 label = (readFile[1:].replace("'", '').replace(' ', '').split(','))
 labels = []
 for i in range(1000):
-   labels.append(int(label[i]))
+    labels.append(int(label[i]))
 
-labels = torch.IntTensor(labels)
+labels = torch.LongTensor(labels)
 
-
-dataset = []
-dataset.append(ImageAdjs)
-dataset.append(labels)
-
-
-
-idx_train, idx_val, idx_test = ut.splitDataset(34,200,300,len(ImageAdjs)) #train/val/test로 나눌 imageId를 가진 배열 return
-#ut.toDevice(adj, features, labels, idx_train, idx_val, idx_test) # gpu면 gpu로 cpu면 cpu로~
+idx_train, idx_val, idx_test = ut.splitDataset(34, 200, 300, len(ImageAdjs))  # train/val/test로 나눌 imageId를 가진 배열 return
+# ut.toDevice(adj, features, labels, idx_train, idx_val, idx_test) # gpu면 gpu로 cpu면 cpu로~
 
 n_labels = labels.max().item() + 1  # 15
 n_features = features.shape[1]  # 10
@@ -68,74 +65,100 @@ n_features = features.shape[1]  # 10
 torch.manual_seed(34)
 
 # model
-#GCN(  (gc1): GraphConvolution (100 -> 20)   (gc2): GraphConvolution (20 -> 15) )
+# GCN(  (gc1): GraphConvolution (100 -> 20)   (gc2): GraphConvolution (20 -> 15) )
 model = md.GCN(nfeat=n_features,
-            nhid=20,  # hidden = 16
-            nclass=n_labels,
-            dropout=0.5)  # dropout = 0.5
+               nhid=20,  # hidden = 16
+               nclass=n_labels,
+               dropout=0.5)  # dropout = 0.5
+
 optimizer = optim.Adam(model.parameters(),
                        lr=0.001, weight_decay=5e-4)
 
 epochs = 1000
-print_steps = 100
+# print_steps = 100
 train_loss, train_acc = [], []
 val_loss, val_acc = [], []
 
-criterion = nn.CrossEntropyLoss() # 손실함수 정의
+loss_ = []  # loss 저장용 리스트
+n = len(ImageAdjs)  # 배치개수
 
-# Train 함수 사용하지 말고, iterator로 graph 와 Y value 넣어서 학습 시키면 될 듯?
-for i in range(epochs):
-    total_loss = 0
-    for j in range(len(ImageAdjs)) :
-        model.train()
-        adj = ImageAdjs[j]
-        label = labels[j]
+
+for epoch in range(10):  # 10회 반복
+    running_loss = 0.0
+    outputs = []
+    target = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    target = torch.Tensor(target)
+
+
+    for i, data in enumerate(ImageAdjs, 0):
+        # inputs, labels = data[0].to(device), data[1].to(device)  # 배치 데이터
+        optimizer.zero_grad()  # 배치마다 optimizer 초기화
+        #data = fre x fre Adj
+        output = model(features, data)  # 노드 10개짜리 예측값 산출   features : tensor(100,10), data =tensor(100,100)
+        outputs.append(int(output.argmax(1)[1]))
+
+        loss = F.nll_loss(output, target)  # 크로스 엔트로피 손실함수 계산
+
+        #loss = F.nll_loss(output, labels)  # 크로스 엔트로피 손실함수 계산
         optimizer.zero_grad()
-        outputs = model(features,adj)
-        predictLabel = outputs.argmax(1)[0]
-        loss = F.nll_loss(predictLabel, label)
-        loss.backward()
-        optimizer.step()
+        loss.backward()  # 손실함수 기준 역전파
+        optimizer.step()  # 가중치 최적화
+        running_loss += loss.item()
 
-        if (i + 1) % 20 == 0:
-            print(f'Epoch: {epoch} - Loss: {loss:.6f}')
+    loss_.append(running_loss / n)
+    print('[%d] loss: %.3f' % (epoch + 1, running_loss / len(ImageAdjs)))
 
-        val_loss = []
-        val_acc = []
-        # 모델 검증
-        for i, (images, targets) in enumerate(valid_loader):
-            model.eval()
-            images, targets = images.to('cuda'), targets.to('cuda')
-
-            with torch.no_grad():
-                outputs = model(images)
-                valid_loss = criterion(outputs, targets).cpu().detach().numpy()
-
-                preds = torch.argmax(outputs, axis=1)
-                preds = preds.cpu().detach().numpy()
-
-                targets = targets.cpu().detach().numpy()
-                batch_acc = (preds == targets).mean()
-
-                val_loss.append(valid_loss)
-                val_acc.append(batch_acc)
-
-        val_loss = np.mean(val_loss)
-        val_acc = np.mean(val_acc)
-
-        print(f'Epoch: {epoch} - valid Loss: {val_loss:.6f} - valid_acc : {val_acc:.6f}')
-
-        if valid_loss_min > val_loss:
-            valid_loss_min = val_loss
-            best_models.append(model)
-
-    # Learning rate 조절
-    lr_scheduler.step()
-
-
-
-
-
+#
+# val_loss = []
+# val_acc = []
+#
+# # for j in range(len(ImageAdjs)):
+# #     model.train()
+# #     adj = ImageAdjs[j]
+# #     label = labels[j]
+# #     optimizer.zero_grad()
+# #     outputs = model(features, adj)
+# #     predictLabel = outputs.argmax(1)[0]
+# #     loss = F.nll_loss(predictLabel, label)
+# #     loss.backward()
+# #     optimizer.step()
+# #
+# #     if (i + 1) % 20 == 0:
+# #         print(f'Epoch: {epoch} - Loss: {loss:.6f}')
+# #
+# #     val_loss = []
+# #     val_acc = []
+#
+#
+# # 모델 검증
+# for i, (images, targets) in enumerate(valid_loader):
+#     model.eval()
+#     images, targets = images.to('cuda'), targets.to('cuda')
+#
+#     with torch.no_grad():
+#         outputs = model(images)
+#         valid_loss = criterion(outputs, targets).cpu().detach().numpy()
+#
+#         preds = torch.argmax(outputs, axis=1)
+#         preds = preds.cpu().detach().numpy()
+#
+#         targets = targets.cpu().detach().numpy()
+#         batch_acc = (preds == targets).mean()
+#
+#         val_loss.append(valid_loss)
+#         val_acc.append(batch_acc)
+#
+# val_loss = np.mean(val_loss)
+# val_acc = np.mean(val_acc)
+#
+# print(f'Epoch: {epoch} - valid Loss: {val_loss:.6f} - valid_acc : {val_acc:.6f}')
+#
+# if valid_loss_min > val_loss:
+#     valid_loss_min = val_loss
+#     best_models.append(model)
+#
+# # Learning rate 조절
+# lr_scheduler.step()
 
 '''
 output = model(features, adj)
