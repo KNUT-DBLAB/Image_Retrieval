@@ -102,6 +102,20 @@ def createAdj(imageId, adjColumn, sceneGraph, objJson, ):
     return adjM
 
 
+''' obj name 단순 임베딩(fasttext로 임베딩 한 값)'''
+def objNameEmbedding(xWords):
+    a = []
+    a.append(xWords)
+    # model = FastText(a, vector_size=10, workers=4, sg=1, word_ngrams=1)
+    model = FastText(xWords, vector_size=10, workers=4, sg=1, word_ngrams=1)
+
+    # for i in a :
+    embedding = []
+    for i in xWords:
+        embedding.append(model.wv[i])
+    return embedding
+
+
 ''' 
 feature matrix 2안 
 scene graph에서 object-predicate-subject를 scenetence로 묶어서 임베딩 
