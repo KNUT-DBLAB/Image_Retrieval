@@ -160,14 +160,6 @@ features, adj, labels = loadData()
 
 
 
-# 정확도
-def accuracy(output, labels): #output : tensor(200, 15), labels : tensor(200,)
-    preds = output.max(1)[1].type_as(labels)  # 비슷하다고 뽑은 것들중에 제일 비슷한 거
-    correct = preds.eq(labels).double()  #tensor (300,)
-    correct = correct.sum()
-    return correct / len(labels)
-
-
 class AverageMeter(object):
     def __init__(self):
         self.reset()

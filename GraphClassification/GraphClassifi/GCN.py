@@ -51,9 +51,7 @@ class GCN(nn.Module):   #nhid : 20, nfeat : 100, self : GCN(), nclass : 15, drop
         # self.gc1 = GraphConvolution(nfeat, nhid)
         self.gc1 = GraphConvolution(nfeat, nhid)   #nhid : 20, nfeat : 100, self : GCN(), nclass : 15, dropout : 0.5
                                                     # out_features : 20, in_features : 100, self : unable to get repr for <class'__main__.GraphConvolution'>, bias : True
-        self.gc2 = GraphConvolution(nhid, nclass)
-
-        #nhid : 20, nfeat : 100, self : (gc1) : GraphConvolution(100->20), nclass : 15, dropout : 0.5
+        self.gc2 = GraphConvolution(nhid, nclass)  #nhid : 20, nfeat : 100, self : (gc1) : GraphConvolution(100->20), nclass : 15, dropout : 0.5
                                                      # in_features : 20, out_features : 15,  self : unable to get repr for <class'__main__.GraphConvolution'>, bias : True
         self.dropout = dropout
 

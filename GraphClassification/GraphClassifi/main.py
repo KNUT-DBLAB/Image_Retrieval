@@ -13,8 +13,10 @@ import numpy as np
 from gensim.models import FastText
 import torch.utils.data as utils
 from torch.autograd import Variable
-
-
+from torch.utils.data import Dataset
+from torch.utils.data import DataLoader
+from datasetTest import GraphDataset
+import time
 
 # cnn Image Classification - https://ariz1623.tistory.com/302
 
@@ -33,21 +35,17 @@ with open("./data/frefre1000.pickle", "rb") as fr:
     data = pickle.load(fr)
 Images = data
 
-# gpu 사용
-device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-#freObj(100)의 fastEmbedding 값 100 x 10
-testFile = open('./data/freObj.txt','r') # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
+# freObj(100)의 fastEmbedding 값 100 x 10
+testFile = open('./data/freObj.txt', 'r')  # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
 readFile = testFile.readline()
-freObjList = (readFile[1:-1].replace("'",'')).split(',')
+freObjList = (readFile[1:-1].replace("'", '')).split(',')
 freObjList = freObjList[:100]
-a = []
-a.append(freObjList)
 model = FastText(freObjList, vector_size=10, workers=4, sg=1, word_ngrams=1)
 
 features = []
 for i in freObjList:
     features.append(list(model.wv[i]))
-features = torch.FloatTensor(features) # tensor(100x10)
+features = torch.FloatTensor(features)  # tensor(100x10)
 
 testFile = open('./data/cluster.txt', 'r')  # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
 readFile = testFile.readline()
@@ -57,70 +55,23 @@ for i in range(1000):
     labels.append(int(label[i]))
 
 
-y = torch.zeros((1000,15))
-y[range(len(labels)), labels] = 1
-encodedLabels = y
+#y = torch.zeros((1000, 15))
+# y[range(len(labels)), labels] = 1
 
-#features = torch.FloatTensor(features.todense())  # <class 'torch.Tensor'> (1000,100), sparseMatrix -> Tensor Matrix, torch.float32
+labels = torch.LongTensor(labels)
+y_one_hot = torch.zeros((1000, 15))
+y_one_hot.scatter_(1, labels.unsqueeze(1), 1) #실제 값 y를 원-핫 벡터로 바꿈
+#print(y_one_hot[0])
 
 
-# print(len(Images))
-# print(Images[0].shape) #torch[100,100]
-# print(features.shape) #[100,10]
-# print(labels.shape)  #[1000]
-# print(labels[0])    #type : tensor
+
+# 원 핫 인코딩
+# labels = torch.LongTensor(labels)
 
 
 idx_train, idx_val, idx_test = ut.splitDataset(34,200,300,len(Images)) #train/val/test로 나눌 imageId를 가진 배열 return
 #ut.toDevice(adj, features, labels, idx_train, idx_val, idx_test) # gpu면 gpu로 cpu면 cpu로~
 
-# print(idx_train)
-# print(idx_val)
-# print(idx_test)
-
-
-#데이터셋 분리
-# x_train, x_val, x_test = Images[idx_train], Images[idx_val], Images[idx_test]
-
-x_train, x_val, x_test = [], [], []
-for i in idx_train :
-  x_train.append(Images[i])
-for i in idx_val :
-  x_val.append(Images[i])
-for i in idx_test :
-  x_test.append(Images[i])
-
-y_train, y_val, y_test = [], [], []
-for i in idx_train :
-  y_train.append(torch.FloatTensor(encodedLabels[i]))
-for i in idx_val :
-  y_val.append(encodedLabels[i])
-for i in idx_test :
-  y_test.append(encodedLabels[i])
-
-
-from torch.utils.data import Dataset
-from torch.utils.data import DataLoader
-
-# Dataset 상속
-class CustomDataset(Dataset):
-  def __init__(self):
-    self.x_data = x_train
-    self.y_data = [[152], [185], [180], [196], [142]]
-
-  # 총 데이터의 개수를 리턴
-  def __len__(self):
-    return len(self.x_data)
-
-  # 인덱스를 입력받아 그에 맵핑되는 입출력 데이터를 파이토치의 Tensor 형태로 리턴
-  def __getitem__(self, idx):
-    x = torch.FloatTensor(self.x_data[idx])
-    y = torch.FloatTensor(self.y_data[idx])
-    return x, y
-
-
-
-labels = torch.Tensor(labels)
 #n_labels = labels.max().item() + 1  # 15
 n_labels = 15  # 15
 n_features = features.shape[1]  # 10
@@ -130,51 +81,46 @@ torch.manual_seed(34)
 # model
 #GCN(  (gc1): GraphConvolution (100 -> 20)   (gc2): GraphConvolution (20 -> 15) )
 model = md.GCN(nfeat=n_features,
-            nhid=100,  # hidden = 16
+            nhid=16,  # hidden = 16
             nclass=n_labels,
             dropout=0.5)  # dropout = 0.5
 optimizer = optim.Adam(model.parameters(),
                        lr=0.001, weight_decay=5e-4)
 
-#criterion = nn.CrossEntropyLoss()
+dataset = GraphDataset(Images, y_one_hot)
+#dataset = GraphDataset(Images, labels)
+dataloader = DataLoader(dataset=dataset, batch_size=1, shuffle=False, drop_last=False)
+
+train_dl = DataLoader(dataset=dataset, batch_size=1, shuffle=False, drop_last=False)
+val_dl = DataLoader(dataset=dataset, batch_size=1, shuffle=False, drop_last=False)
 
 
 epochs = 1000
-print_steps = 100
-train_loss, train_acc = [], []
-val_loss, val_acc = [], []
+# print_steps = 100
+# train_loss, train_acc = [], []
+# val_loss, val_acc = [], []
+#
+# evaluation = lambda output, target: float(torch.sum(output.eq(target))) / float(target.size()[0])
 
-evaluation = lambda output, target: float(torch.sum(output.eq(target))) / float(target.size()[0])
-
-for epoch in range(45):
-    running_loss = 0.0
-    acc = 0.
-    correct = 0
-    outputs = []
-    #for i, data in enumerate(train_loader, 0):
-    for i in range(len(x_train)):
-        inputs, labels = x_train[i], y_train[i]
-        #inputs, labels = Variable(inputs.cuda()), Variable(labels.cuda())
-        inputs, labels = Variable(inputs), Variable(y_train[i])
-        optimizer.zero_grad()
-        output = model(features, inputs)
-        # print(outputs)
-        outputs.append(output)
-        print(output.argmax(1))
-        loss = F.nll_loss(output.argmax(1), labels)
+history = []
+for epoch in range(epochs):
+    model.train()
+    train_losses = []
+    for batch in dataloader:
+        images, labels = batch
+        out = model(features, images.squeeze())  # Generate predictions
+        loss = F.cross_entropy(out, labels)  # Calculate loss
+        train_losses.append(loss)
         loss.backward()
         optimizer.step()
-        running_loss += loss.data[0]
-        prediction = torch.max(outputs.data, 1)[1]  # first column has actual prob.
-        correct += prediction.eq(labels.data.view_as(prediction)).cpu().sum()
+        optimizer.zero_grad()
 
-        if i % 2000 == 1999:
-            print('[%d, %5d] loss: %.6f acc : %.6f' % (
-                epoch + 1, i + 1, running_loss / 2000, 100 * correct / ((i + 1) * 4)))
-            running_loss = 0.0
+    result = evaluate(model, val_loader)
+    result['train_loss'] = torch.stack(train_losses).mean().item()
+    model.epoch_end(epoch, result)
+    history.append(result)
 
-    print('Finished Training')
-
+    print(history)
 
 
 
