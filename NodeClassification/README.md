@@ -8,7 +8,7 @@
 범위1과 범위 2의 예측 클래스 번호 간 비교를 통해 TF를 return 함   
 
 > 해당 예제에서는 df를 이용해 아래와 같이 결과를 확인함
-> 
+> <img src = "https://github.com/Hanin00/Image_Retrieval/blob/9d3a21300c012d31c1e35474f19a648f14d14fbd/extraImages/NodeClassification-CompareResult.png">
 
 
 > 
