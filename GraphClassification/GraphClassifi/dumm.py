@@ -1,13 +1,19 @@
+import torch
+import torch.optim as optim
+import torch.nn as nn
+from torch.autograd import Variable
+
+import time
+import argparse
+import os
+import shutil
+import numpy as np
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import KFold, train_test_split
+
+# Our Modules
+from utils import compute_nystrom, create_train_val_test_loaders, save_checkpoint, AverageMeter
+from model import CNN
 
 
-
-lista = [1,2,3,4]
-listb = ['토끼','기니피그','수달','갱얼쥐']
-
-
-listc = [[1,'토끼'], [2,'고슴도치'], [3, '수달'], [4,'갱얼쥐']]
-
-listd = []
-listd.append(lista)
-listd.append(listb)
 

@@ -89,9 +89,6 @@ for i in range(epochs):
     train_acc += [ta]
     if ((i + 1) % print_steps) == 0 or i == 0:
         tl, ta = ut.evaluate(idx_train, model,features, adj,labels)
-        print(features.shape)
-        print("adj : ", adj)
-        print("adj : ", adj.shape)
         vl, va = ut.evaluate(idx_train, model,features, adj,labels)
         val_loss += [vl]
         val_acc += [va]
@@ -101,6 +98,10 @@ for i in range(epochs):
 
 output = model(features, adj) #[100,15]
 print(output.shape)
+print(output)
+
+sys.exit()
+
 # test
 samples = 10
 # torch.randperm : 데이터 셔플
