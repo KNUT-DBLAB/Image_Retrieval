@@ -14,27 +14,24 @@ from gensim.models import FastText
 import torch.utils.data as utils
 from torch.autograd import Variable
 
-
+import torch
+from torch.utils.data import Dataset, DataLoader
 
 with open("./data/frefre1000.pickle", "rb") as fr:
     data = pickle.load(fr)
 Images = data
 
-# gpu 사용
-device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-#freObj(100)의 fastEmbedding 값 100 x 10
-testFile = open('./data/freObj.txt','r') # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
+# freObj(100)의 fastEmbedding 값 100 x 10
+testFile = open('./data/freObj.txt', 'r')  # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
 readFile = testFile.readline()
-freObjList = (readFile[1:-1].replace("'",'')).split(',')
+freObjList = (readFile[1:-1].replace("'", '')).split(',')
 freObjList = freObjList[:100]
-a = []
-a.append(freObjList)
 model = FastText(freObjList, vector_size=10, workers=4, sg=1, word_ngrams=1)
 
 features = []
 for i in freObjList:
     features.append(list(model.wv[i]))
-features = torch.FloatTensor(features) # tensor(100x10)
+features = torch.FloatTensor(features)  # tensor(100x10)
 
 testFile = open('./data/cluster.txt', 'r')  # 'r' read의 약자, 'rb' read binary 약자 (그림같은 이미지 파일 읽을때)
 readFile = testFile.readline()
@@ -43,18 +40,37 @@ labels = []
 for i in range(1000):
     labels.append(int(label[i]))
 
+# y = torch.zeros((1000, 15))
+# y[range(len(labels)), labels] = 1
+# 원 핫 인코딩
+labels = torch.LongTensor(labels)
 
-y = torch.zeros((1000,15))
-y[range(len(labels)), labels] = 1
-encodedLabels = y
+class GraphDataset(Dataset):
+    def __init__(self, x_tensor, y_tensor):
+        super(GraphDataset, self).__init__()
+        self.x = x_tensor
+        self.y = y_tensor
+        self.AdjList = []
+        self.classList = []
 
-
-# dataset 구성요소
-
-class my_dataset(torch.utils.data.Dataset):
-
-    def __init__(self, x, transforms=None):
+    def __getitem__(self, index):
+        # imgAdj = self.AdjList[idx]
+        # label = self.classList[idx]
+        imgAdj = self.x[index]
+        label = self.y[index]
+        return imgAdj, label
 
     def __len__(self):
+        return len(self.x)
 
-    def __getitem__(self, idx):
+
+if __name__ == "__main__":
+    print(len(Images))
+    print(len(labels))
+    dataset = GraphDataset(Images, labels)
+    dataloader = DataLoader(dataset=dataset, batch_size=1, shuffle=False, drop_last=False)
+
+    for epoch in range(2):
+        print(f"epoch : {epoch}")
+        for adj, label in dataloader:
+            print("epoch",epoch,"adj : ", adj, "label : ", label)
