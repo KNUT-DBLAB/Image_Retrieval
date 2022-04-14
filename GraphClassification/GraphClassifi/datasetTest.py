@@ -46,10 +46,13 @@ for i in range(1000):
 labels = torch.LongTensor(labels)
 
 class GraphDataset(Dataset):
-    def __init__(self, x_tensor, y_tensor):
+    def __init__(self, x_tensor, y_tensor, ):
         super(GraphDataset, self).__init__()
         self.x = x_tensor
         self.y = y_tensor
+        y_one_hot = torch.zeros((1000, 15))
+        y_one_hot.scatter_(1, y_tensor.unsqueeze(1), 1)
+        self.attr = y_one_hot
         self.AdjList = []
         self.classList = []
 
@@ -58,7 +61,8 @@ class GraphDataset(Dataset):
         # label = self.classList[idx]
         imgAdj = self.x[index]
         label = self.y[index]
-        return imgAdj, label
+        attr = self.attr[index]
+        return imgAdj, label, attr
 
     def __len__(self):
         return len(self.x)
@@ -72,5 +76,5 @@ if __name__ == "__main__":
 
     for epoch in range(2):
         print(f"epoch : {epoch}")
-        for adj, label in dataloader:
-            print("epoch",epoch,"adj : ", adj, "label : ", label)
+        for adj, label, attr in dataloader:
+            print("epoch",epoch, "label : ", label, "onehot ,attr : ", attr)

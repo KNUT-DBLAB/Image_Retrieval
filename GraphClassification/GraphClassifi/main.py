@@ -59,11 +59,9 @@ for i in range(1000):
 # y[range(len(labels)), labels] = 1
 
 labels = torch.LongTensor(labels)
-y_one_hot = torch.zeros((1000, 15))
-y_one_hot.scatter_(1, labels.unsqueeze(1), 1) #실제 값 y를 원-핫 벡터로 바꿈
+# y_one_hot = torch.zeros((1000, 15))
+# y_one_hot.scatter_(1, labels.unsqueeze(1), 1) #실제 값 y를 원-핫 벡터로 바꿈
 #print(y_one_hot[0])
-
-
 
 # 원 핫 인코딩
 # labels = torch.LongTensor(labels)
@@ -81,7 +79,7 @@ torch.manual_seed(34)
 # model
 #GCN(  (gc1): GraphConvolution (100 -> 20)   (gc2): GraphConvolution (20 -> 15) )
 model = md.GCN(nfeat=n_features,
-            nhid=16,  # hidden = 16
+            nhid=100,  # hidden = 16
             nclass=n_labels,
             dropout=0.5)  # dropout = 0.5
 optimizer = optim.Adam(model.parameters(),
