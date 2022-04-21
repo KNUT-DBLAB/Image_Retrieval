@@ -84,7 +84,7 @@ class GraphConvolution(Module):
         #self.out_features = out_features+6
         self.out_features = out_features
         # weight reset
-        self.weight = Parameter(torch.empty(in_features, out_features))  # 10x hidden -> 10,10 # out_features : 100, in_features : 10, self : GraphConvolution(100->20), bias : True
+        self.weight = Parameter(torch.empty(in_features, out_features)) # 10x hidden -> 10,15  # out_features : 15, in_features : 10, self : GraphConvolution(100->20), bias : True
         if bias:
              self.bias = Parameter(torch.empty(out_features))   #weight = 100,16    self.in_features = 100 self.in_features = 100, out_features=22
         else:
@@ -133,20 +133,24 @@ model = GCN(n_features, 15, n_labels)   #n_features = 100, n_labels = 15
 optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
 
 
-for epoch in range(20):
+for epoch in range(2000):
     #batched_graph : 1,100,100, labels :    attr : 1,15
     for batched_graph, labels,attr in train_dataloader:
-        pred = model(batched_graph.squeeze(), features) # Tensor(1,100,100), features = Tensor(100,10)
-        loss = F.cross_entropy(pred, attr)
+        pred = model(batched_graph.squeeze(), features) #Tensor(1,100,100), features = Tensor(100,10)
+        #loss = F.cross_entropy(torch.argmax(pred), attr)
+        #splits = torch.stack(list(pred[0].split(1)), dim=0)
+
+        loss = F.nll_loss(pred[0], attr.squeeze().long())
+        #loss = F.cross_entropy(splits, torch.FloatTensor(attr.squeeze()))
+        #loss = F.cross_entropy(pred[1], attr.squeeze())
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
 
-
 num_correct = 0
 num_tests = 0
-for batched_graph, labels in test_dataloader:
-    pred = model(batched_graph, batched_graph.ndata['attr'].float())
+for batched_graph, labels,attr in test_dataloader:
+    pred = model(batched_graph.squeeze(), features)
     num_correct += (pred.argmax(1) == labels).sum().item()
     num_tests += len(labels)
 
