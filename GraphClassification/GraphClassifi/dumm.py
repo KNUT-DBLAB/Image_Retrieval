@@ -133,7 +133,7 @@ model = GCN(n_features, 15, n_labels)   #n_features = 100, n_labels = 15
 optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
 
 
-for epoch in range(2000):
+for epoch in range():
     #batched_graph : 1,100,100, labels :    attr : 1,15
     for batched_graph, labels,attr in train_dataloader:
         pred = model(batched_graph.squeeze(), features) #Tensor(1,100,100), features = Tensor(100,10)
@@ -155,3 +155,8 @@ for batched_graph, labels,attr in test_dataloader:
     num_tests += len(labels)
 
 print('Test accuracy:', num_correct / num_tests)
+
+
+#20 - 0.15
+#200 - 0.2
+#2000 - 0.25

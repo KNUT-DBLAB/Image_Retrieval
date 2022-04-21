@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce4622fc-611d-45eb-8ee4-5e38aff1c1af" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../GraphClassification/GraphClassifi/data/adjColumn_new.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../GraphClassification/GraphClassifi/dumm.py" beforeDir="false" afterPath="$PROJECT_DIR$/../GraphClassification/GraphClassifi/dumm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GCN.py" beforeDir="false" afterPath="$PROJECT_DIR$/GCN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NodeClassi2.py" beforeDir="false" afterPath="$PROJECT_DIR$/NodeClassi2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/util.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
