@@ -105,11 +105,6 @@ def train(model, optimizer,features, adj,idx_train,labels):
     optimizer.zero_grad()
     output = model(features, adj)  # model에 값 넣음  tensor(1000,15)
     loss = F.nll_loss(output[idx_train], labels[idx_train])  # loss 함수   tensor, torch.float32
-    print(output[idx_train]) #100, 15
-    print(labels[idx_train]) #100
-    print(output[idx_train].shape)
-    print(labels[idx_train].shape)
-    sys.exit()
 
     acc = accuracy(output[idx_train], labels[idx_train])  # accuracy 파악
     loss.backward()
