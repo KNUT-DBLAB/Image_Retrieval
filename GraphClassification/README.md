@@ -13,9 +13,8 @@ Visual Genome을 사용한 Graph classfication 모델
 
 ## Model
 - CNN의 Input 형태를 참고해 Input을 입력함, 각 이미지의 freObj 간 연관성을 학습해 해당 이미지의 label을 예측함
-
-<img src = "extraImages/GraphClassificationArchitecture.PNG">
-
+- 
+<img src= "https://github.com/Hanin00/Image_Retrieval/blob/71184d21637903c19809adc5d6af7dfe4469bda7/extraImages/GraphClassificationArchitecture.PNG">
 
 ### **Input data format**
 
