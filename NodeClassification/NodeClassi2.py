@@ -32,7 +32,6 @@ features = torch.Tensor(features) # tensor(100x10)
 adj = torch.FloatTensor(np.load('./data/idFreFeature.npy'))  # tensor(1000,100)
 
 
-#
 # #Data 분포 보고 싶어서 시각화 해봄.
 # import seaborn as sns
 # import matplotlib.pyplot as plt
