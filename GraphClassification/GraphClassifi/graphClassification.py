@@ -134,6 +134,8 @@ for batched_graph, labels,attr in test_dataloader:
 print('Test accuracy:', num_correct / num_tests)
 
 
+##commit 용 dumm
+
 #conv 2
 #20 - 0.15
 #200 - 0.2
