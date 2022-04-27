@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ce4622fc-611d-45eb-8ee4-5e38aff1c1af" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../GraphClassification/GraphClassifi/dumm.py" beforeDir="false" afterPath="$PROJECT_DIR$/../GraphClassification/GraphClassifi/dumm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +235,7 @@
       <workItem from="1649899477075" duration="2869000" />
       <workItem from="1649911475826" duration="9447000" />
       <workItem from="1650365392874" duration="1616000" />
-      <workItem from="1650516073879" duration="9696000" />
+      <workItem from="1650516073879" duration="11536000" />
     </task>
     <servers />
   </component>
