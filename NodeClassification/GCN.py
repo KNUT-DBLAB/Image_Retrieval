@@ -7,9 +7,6 @@ import torch.optim as optim
 import torch.nn.functional as F
 
 
-
-
-
 # Model
 class GraphConvolution(Module):
     def __init__(self, in_features, out_features, bias=True):
